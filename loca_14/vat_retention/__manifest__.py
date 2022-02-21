@@ -11,13 +11,13 @@
         'images': [],
         'depends': [
             'account',
-            'account_accountant',
-            'base',
             'l10n_ve_fiscal_requirements',
+            'l10n_ve_account_reports',
             ],
         'data': [
             'security/ir.model.access.csv',
             'data/vat_retention_data.xml',
+            'data/account_sequence.xml',
             'views/retention_vat_views.xml',
             'views/menu_vat_retention.xml',
             'views/partner_views.xml',

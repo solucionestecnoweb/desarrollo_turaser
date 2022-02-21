@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_montaje_form" model="ir.ui.view">
+        <field name="name">view.product.montaje.form</field>
+        <field name="model">product.montaje</field>
+        <field name="arch" type="xml">
+            <form string="Lado Montaje">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_product_montaje_tree" model="ir.ui.view">
+        <field name="name">view.product.montaje.tree</field>
+        <field name="model">product.montaje</field>
+        <field name="arch" type="xml">
+            <tree string="Lado Montaje">
+                <field name="name"/>
+            </tree>
+        </field>
+
+    </record>
+        <record id="action_product_montaje" model="ir.actions.act_window">
+        <field name="name">Montaje</field>
+        <field name="res_model">product.montaje</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

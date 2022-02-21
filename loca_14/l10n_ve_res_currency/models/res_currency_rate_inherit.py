@@ -10,7 +10,7 @@ class CurrencyRate(models.Model):
     #hora = fields.Datetime('Fecha y Hora', default=lambda self: fields.datetime.today(), required=True)
     hora = fields.Datetime('Fecha y Hora', default=lambda *a:datetime.now().strftime('%Y-%m-%d 04:00:00'), required=True) #loca 14
     ##name = fields.Datetime('Fecha y Hora', default=lambda self: fields.datetime.today(), required=True)
-    rate_real = fields.Float(digits=(12, 2), help='se introduce la tasa real del mercado')
+    rate_real = fields.Float(digits=(12, 4), help='se introduce la tasa real del mercado')
     rate = fields.Float(digits=(12, 20), help='The rate of the currency to the currency of rate 1')
     _sql_constraints = [('unique_name_per_day', 'CHECK(1=1)', 'Only one currency rate per day allowed!')]
 
@@ -41,7 +41,7 @@ class CurrencyRate(models.Model):
 class Currency(models.Model):
     _inherit = "res.currency"
 
-    rate_real = fields.Float(compute='_compute_tasa_real', digits=(12, 2), help='se introduce la tasa real del mercado')
+    rate_real = fields.Float(compute='_compute_tasa_real', digits=(12, 4), help='se introduce la tasa real del mercado')
     rate = fields.Float(compute='_compute_current_rate', string='Current Rate', digits=(12, 20),
                         help='The rate of the currency to the currency of rate 1.')
     rate_rounding = fields.Float(digits=(12, 9), help='la tasa inversa del mercado')

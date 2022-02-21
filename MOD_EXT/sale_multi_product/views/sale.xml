@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="view_order_multi_product_form" model="ir.ui.view">
+        <field name="name">sale.order.multi.product.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']" position="before">
+                <group>
+                    <button name="%(action_multi_product_wizard)d" type="action" class="btn-primary"
+                            attrs="{'invisible': [('state', '!=', 'draft')]}" string="Multi Product"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

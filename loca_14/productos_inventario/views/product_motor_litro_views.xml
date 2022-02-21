@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_motor_litro_form" model="ir.ui.view">
+        <field name="name">view.motor.litro.form</field>
+        <field name="model">product.motor.litro</field>
+        <field name="arch" type="xml">
+            <form string="Motor Litro">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_product_motor_litro_tree" model="ir.ui.view">
+        <field name="name">view.motor.litro.tree</field>
+        <field name="model">product.motor.litro</field>
+        <field name="arch" type="xml">
+            <tree string="Motor Litro">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_product_motor_litro" model="ir.actions.act_window">
+        <field name="name">Motor Litro</field>
+        <field name="res_model">product.motor.litro</field>
+        <field name="view_mode">tree,form</field>
+
+    </record>
+</odoo>

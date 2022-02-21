@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_account_invoice_free_with_payments">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <style>
+                        .bordeAbajo{
+                            border-bottom: 1px solid black;
+                        }
+                        .bordeArriba{
+                            border-top: 1px solid black;
+                        }
+                        .bordeIzquierda{
+                            border-left: 1px solid black;
+
+                        }
+                        .borde-lef-right{
+                            border-right: 1px solid black
+                            border-left: 1px solid black;
+                        }
+                        h4{
+                            font-size: 18px;
+                        }
+                    </style>
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-12 pull-right text-right">
+                                        <h4>
+                                            <span t-if="o.move_type == 'out_invoice' and not o.debit_origin_id and not o.is_delivery_note">Factura:
+                                                <br/>
+                                                <span t-field="o.invoice_number_cli"/>
+                                            </span>
+                                            <span t-if="o.move_type == 'out_refund' and not o.is_delivery_note" >Nota de Crédito:
+                                                <br/>
+                                                <span t-field="o.refuld_number_cli"/>
+                                            </span>
+                                            <span t-if="o.debit_origin_id and not o.is_delivery_note">Nota de Débito:
+                                                <br/>
+                                                <span t-field="o.invoice_number"/>
+                                            </span>
+                                        </h4>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-7">
+                                        <ul class="list-inline mb4" style="font-size:12px;">
+                                            <li t-if="o.partner_id.name"><strong>Razón Social:</strong> <span t-field="o.partner_id.name"/></li>
+                                            <li t-if="o.partner_id.vat"><strong>RIF:</strong> <span t-field="o.partner_id.vat"/></li>
+                                            <li t-if="o.partner_id.street or o.partner_id.street2"><strong>Dirección:</strong> <span t-field="o.partner_id.street"/>,<span t-field="o.partner_id.street2"/></li>
+                                            <li t-if="o.partner_id.phone or o.partner_id.mobile"><strong>Telefonos: </strong><span class="o_force_ltr" t-field="o.partner_id.phone"/>/<span class="o_force_ltr" t-field="o.partner_id.mobile"/></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-5 pull-right text-right" style="font-size:12px;">
+                                        <ul class="list-inline mb4">
+                                            <li t-if="o.invoice_date"><strong>Fecha de Emisión:</strong> <span t-field="o.invoice_date"/></li>
+                                            <li t-if="o.invoice_date_due"><strong>Fecha de Vencimiento:</strong> <span t-field="o.invoice_date_due"/></li>
+                                            <li t-if="o.invoice_user_id.name"><strong>Vendedor:</strong> <span t-field="o.invoice_user_id.name"/></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <t t-set="acum_alicuota_general" t-value="0.0"/>
+                                <t t-set="acum_alicuota_reducida" t-value="0.0"/>
+                                <t t-set="acum_alicuota_adicional" t-value="0.0"/>
+                                <t t-set="acum_excento" t-value="0.0"/>
+                                <t t-set="acum_descuento" t-value="0.0"/>
+                                <t t-set="total_factura" t-value="0.0"/>
+                                <t t-set="rate_bs" t-value="o.amount_total_signed / o.amount_total"/>
+
+                                <table class="table table-borderless table-sm" style="margin-top:10px;">
+                                    <thead class="bordeAbajo bordeArriba">
+                                        <tr class="text-center" style="font-size:12px;">
+                                            <th>ITEM/COD</th>
+                                            <th>DESCRIPCIÓN</th>
+                                            <th>CANTIDAD</th>
+                                            <th>PRECIO</th>
+                                            <th>DESC%</th>
+                                            <th>TOTAL</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="o.invoice_line_ids" t-as="line">
+                                            <tr class="text-center" style="font-size:10px;">
+                                                <td t-esc="line.product_id.default_code"/>
+                                                <td t-esc="line.product_id.name"/>
+                                                <td t-esc="line.quantity"/>
+                                                <td t-esc="(line.price_unit * rate_bs)" t-options='{"widget": "float", "precision": 2}'/>
+                                                <td t-esc="line.discount">%</td>
+                                                <td t-esc="(line.price_subtotal * rate_bs)" t-options='{"widget": "float", "precision": 2}'/>
+                                            </tr>
+                                            <t t-if="line.tax_ids.aliquot == 'general'">
+                                                <t t-set="acum_alicuota_general" t-value="acum_alicuota_general + (line.price_total - line.price_subtotal)"/>
+                                            </t>
+                                            <t t-if="line.tax_ids.aliquot == 'reduced'">
+                                                <t t-set="acum_alicuota_reducida" t-value="acum_alicuota_reducida + (line.price_total - line.price_subtotal)"/>
+                                            </t>
+                                            <t t-if="line.tax_ids.aliquot == 'additional'">
+                                                <t t-set="acum_alicuota_adicional" t-value="acum_alicuota_adicional + (line.price_total - line.price_subtotal)"/>
+                                            </t>
+                                            <t t-if="line.tax_ids.aliquot == 'exempt'">
+                                                <t t-set="acum_excento" t-value="acum_alicuota_adicional + (line.price_total)"/>
+                                            </t>
+                                            <t t-if="line.discount">
+                                                <t t-set="acum_descuento" t-value="acum_descuento + (line.quantity * line.price_unit - line.price_subtotal)"/>
+                                            </t>
+                                        </t>
+                                    </tbody>
+                                </table>
+
+                                <div class="clearfix" style="margin-top:20px;">
+                                     <div class="row">
+                                         <div class="col-7">
+                                             <p class="justify-content-end" style="font-size:12px;">
+                                                 <span><strong>Terminos y Condiciones:</strong>
+                                                     <span t-field="o.narration"/>
+                                                 </span>
+                                             </p>
+                                         </div>
+                                         <div id="total" class="col-5">
+                                             <table style="page-break-inside: avoid; font-size:12px; width: 100%;">
+                                                 <tr class="border-black o_subtotal">
+                                                    <td><strong>SUB-TOTAL</strong></td>
+                                                    <td class="text-right">
+                                                        <span t-esc="(o.amount_untaxed * rate_bs)" t-options='{"widget": "float", "precision": 2}'/>
+                                                    </td>
+                                                </tr>
+
+                                                 <tr>
+                                                     <td><strong>DESCUENTO</strong></td>
+                                                     <td class="text-right">
+                                                         <span t-esc="(acum_descuento * rate_bs)" t-options='{"widget": "float", "precision": 2}'>%</span>
+                                                     </td>
+                                                 </tr>
+
+                                                 <tr>
+                                                     <td><strong>TOTAL EXENTO</strong></td>
+                                                     <td class="text-right">
+                                                         <span t-esc="(acum_excento * rate_bs)" t-options='{"widget": "float", "precision": 2}'/>
+                                                     </td>
+                                                 </tr>
+
+                                                 <tr>
+                                                     <td><strong>TOTAL BASE IMPONIBLE</strong></td>
+                                                     <td class="text-right">
+                                                         <span t-esc="(o.amount_untaxed * rate_bs)" t-options='{"widget": "float", "precision": 2}'/>
+                                                     </td>
+                                                 </tr>
+
+                                                 <tr>
+                                                    <td><strong>IMPUESTOS:</strong></td>
+                                                     <td/>
+                                                 </tr>
+                                                 <tr t-if="acum_alicuota_general > 0.0">
+                                                     <td><strong>(16%)</strong></td>
+                                                     <td class="text-right">
+                                                         <span t-esc="(acum_alicuota_general * rate_bs)" t-options='{"widget": "float", "precision": 2}'/>
+                                                     </td>
+                                                 </tr>
+
+                                                 <tr t-if="acum_alicuota_reducida > 0.0">
+                                                     <td><strong>(8%)</strong></td>
+                                                     <td class="text-right">
+                                                         <span t-esc="(acum_alicuota_reducida * rate_bs)" t-options='{"widget": "float", "precision": 2}'/>
+                                                     </td>
+                                                 </tr>
+
+                                                 <tr t-if="acum_alicuota_reducida > 0.0">
+                                                     <td><strong>(31%)</strong></td>
+                                                     <td class="text-right">
+                                                         <span t-esc="(acum_alicuota_reducida * rate_bs)" t-options='{"widget": "float", "precision": 2}'/>
+                                                     </td>
+                                                 </tr>
+
+                                                 <tr>
+                                                     <td><strong>TOTAL OPERACIÓN</strong></td>
+                                                     <td class="text-right">
+                                                         <span t-esc="(o.amount_total * rate_bs)" t-options='{"widget": "float", "precision": 2}'/>
+                                                     </td>
+                                                 </tr>
+                                             </table>
+                                         </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

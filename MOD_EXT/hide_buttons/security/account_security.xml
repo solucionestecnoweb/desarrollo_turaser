@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record model="ir.module.category" id="module_category_special_account_button">
+            <field name="name">Otros</field>
+            <field name="sequence">100</field>
+        </record>
+
+        <record id="show_boton_account_group" model="res.groups">
+		    <field name="name">Registrar Pagos</field>
+		    <field name="category_id" ref="module_category_special_account_button"/>
+		</record>
+
+        <record id="show_boton_account_post_group" model="res.groups">
+		    <field name="name">Publicar facturas</field>
+		    <field name="category_id" ref="module_category_special_account_button"/>
+		</record>
+
+        <record id="hide_boton_standard_price_group" model="res.groups">
+		    <field name="name">Visualizar Coste de Producto</field>
+		    <field name="category_id" ref="module_category_special_account_button"/>
+		</record>
+    </data>
+</odoo>

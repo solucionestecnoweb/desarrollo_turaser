@@ -9,10 +9,10 @@
 
 			<xpath expr="//page[@name='other_info']" position="before">
 			  <page string="Resumen IVA por Alicuota" attrs="{'invisible': [('move_type', '=', 'entry')]}">
-			    <group string="Resumen IVA por Alicuota">
+<!--			    <group string="Resumen IVA por Alicuota">-->
                     <!--field name="tax_id"/-->
-                    <field name="alicuota_line_ids" nolabel="1" readonly="True">
-                    <tree string="VAT Retention Line" editable="buttom">
+                    <field name="alicuota_line_ids">
+                    <tree string="VAT Retention Line" create="0" edit="0" delete="0">
                         <field name="tipo_doc"/>
                         <!--field name="tax_id"/-->
                         <field name="total_con_iva" sum="total_con_iva"/>
@@ -31,7 +31,7 @@
                         <field name="state"/>
                     </tree>
                     </field>
-			    </group>
+<!--			    </group>-->
 			  </page>
 			</xpath>
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_year_form" model="ir.ui.view">
+        <field name="name">view.year.form</field>
+        <field name="model">product.year</field>
+        <field name="arch" type="xml">
+            <form string="Fecha Desde">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_year_tree" model="ir.ui.view">
+        <field name="name">view.year.tree</field>
+        <field name="model">product.year</field>
+        <field name="arch" type="xml">
+            <tree string="Fecha Desde">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    <record id="action_product_year" model="ir.actions.act_window">-->
+<!--        <field name="name">Fecha Desde</field>-->
+<!--        <field name="res_model">product.year</field>-->
+<!--        <field name="view_mode">tree,form</field>-->
+<!--    </record>-->
+</odoo>

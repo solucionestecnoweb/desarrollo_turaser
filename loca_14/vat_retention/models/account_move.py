@@ -28,7 +28,7 @@ class AccountMove(models.Model):
 
     @api.depends('partner_id')
     def _concatena(self):
-        if self.partner_id.doc_type=="v":
+        if self.partner_id.doc_type =="v":
             tipo_doc="V"
         if self.partner_id.doc_type=="e":
             #self.partner_id.doc_type="E"
@@ -58,7 +58,8 @@ class AccountMove(models.Model):
         
         # si es agente de retencion
         self.funcion_numeracion_fac()
-        #raise UserError(_('tipo fact = %s')%self.type)
+        #raise UserError(_('tipo fact =
+        #if self.move_type in ['out_invoice', 'out_refund', 'out_receipt']:
         if self.move_type=="out_invoice" or self.move_type=="out_refund" or self.move_type=="out_receipt":
             tipo_fact="cliente"
             if self.partner_id.ret_agent:
@@ -120,36 +121,35 @@ class AccountMove(models.Model):
             self.invoice_ctrl_number=self.refund_ctrl_number_pro
             partners='cli' # aqui si es un cliente
 
-        if self.move_type=="out_invoice":
-            if self.nr_manual==False:
-                self.invoice_number_cli=self.get_invoice_number_cli()
-                self.invoice_number=self.invoice_number_cli #self.get_invoice_number_cli()
-                self.invoice_ctrl_number_cli=self.get_invoice_ctrl_number_cli()
-                self.invoice_ctrl_number=self.invoice_ctrl_number_cli #self.get_invoice_ctrl_number_cli()
+        if self.move_type in ['out_invoice'] and not self.invoice_number_cli and not self.invoice_ctrl_number_cli:
+            if not self.nr_manual:
+                self.invoice_number_cli = self.get_invoice_number_cli()
+                self.invoice_number = self.invoice_number_cli
+                self.invoice_ctrl_number_cli = self.get_invoice_ctrl_number_cli()
+                self.invoice_ctrl_number = self.invoice_ctrl_number_cli
             else:
-                self.invoice_number=self.invoice_number_cli
-                self.invoice_ctrl_number=self.invoice_ctrl_number_cli
+                self.invoice_number = self.invoice_number_cli
+                self.invoice_ctrl_number = self.invoice_ctrl_number_cli
 
-        if self.move_type=="out_refund":
-            if self.nr_manual==False:
-                self.refuld_number_cli=self.get_refuld_number_cli()
-                self.invoice_number=self.refuld_number_cli #self.get_refuld_number_cli()
-                self.refund_ctrl_number_cli=self.get_refuld_ctrl_number_cli()
-                self.invoice_ctrl_number=self.refund_ctrl_number_cli #self.get_refuld_ctrl_number_cli()
+        if self.move_type in ['out_refund'] and not self.refuld_number_cli and not self.refund_ctrl_number_cli:
+            if not self.nr_manual:
+                self.refuld_number_cli = self.get_refuld_number_cli()
+                self.invoice_number = self.refuld_number_cli
+                self.refund_ctrl_number_cli = self.get_invoice_ctrl_number_cli()
+                self.invoice_ctrl_number = self.refund_ctrl_number_cli
             else:
-                self.invoice_number=self.refuld_number_cli
-                self.invoice_ctrl_number=self.refund_ctrl_number_cli
+                self.invoice_number = self.refuld_number_cli
+                self.invoice_ctrl_number = self.refund_ctrl_number_cli
 
-        if self.move_type=="out_receipt":
-            if self.nr_manual==False:
-                self.refuld_number_cli=self.get_refuld_number_pro()
-                self.invoice_number=self.refuld_number_cli #self.get_refuld_number_cli()
-                self.refund_ctrl_number_cli=self.get_refuld_ctrl_number_pro()
-                self.invoice_ctrl_number=self.refund_ctrl_number_cli #self.get_refuld_ctrl_number_cli()
-                #self.invoice_number=self.get_nro_cliente()
+        if self.move_type in ['out_receipt'] and not self.refuld_number_cli and not self.refund_ctrl_number_cli:
+            if not self.nr_manual:
+                self.refuld_number_cli = self.get_refuld_number_pro()
+                self.invoice_number = self.refuld_number_cli
+                self.refund_ctrl_number_cli = self.get_invoice_ctrl_number_cli()
+                self.invoice_ctrl_number = self.refund_ctrl_number_cli
             else:
-                self.invoice_number=self.refuld_number_cli
-                self.invoice_ctrl_number=self.refund_ctrl_number_cli
+                self.invoice_number = self.refuld_number_cli
+                self.invoice_ctrl_number = self.refund_ctrl_number_cli
 
     def action_create_vat_retention(self,tipo_factt):
         "This function created the VAT retention Voucher"
@@ -362,157 +362,50 @@ class AccountMove(models.Model):
                 'manual':False,
                 })
         # PUNTO D
-       
 
     def get_invoice_number_cli(self):
-        '''metodo que crea el Nombre del asiento contable si la secuencia no esta creada, crea una con el
-        nombre: 'l10n_ve_cuenta_retencion_iva'''
-
         self.ensure_one()
-        SEQUENCE_CODE = 'l10n_ve_nro_factura_cliente'
-        company_id = 1
-        IrSequence = self.env['ir.sequence'].with_context(force_company=1)
-        name = IrSequence.next_by_code(SEQUENCE_CODE)
-
-        # si aún no existe una secuencia para esta empresa, cree una
-        if not name:
-            IrSequence.sudo().create({
-                'prefix': 'FACT/',
-                'name': 'Localización Venezolana Factura cliente %s' % 1,
-                'code': SEQUENCE_CODE,
-                'implementation': 'no_gap',
-                'padding': 4,
-                'number_increment': 1,
-                'company_id': 1,
-            })
-            name = IrSequence.next_by_code(SEQUENCE_CODE)
-        #self.invoice_number_cli=name
-        return name
+        if not self.is_delivery_note:
+            seq = self.env['ir.sequence'].get('account.out.invoice.cli')
+            return seq
+        return ''
 
     def get_invoice_ctrl_number_cli(self):
-        '''metodo que crea el Nombre del asiento contable si la secuencia no esta creada, crea una con el
-        nombre: 'l10n_ve_cuenta_retencion_iva'''
-
         self.ensure_one()
-        SEQUENCE_CODE = 'l10n_ve_nro_control_factura_cliente'
-        company_id = 1
-        IrSequence = self.env['ir.sequence'].with_context(force_company=1)
-        name = IrSequence.next_by_code(SEQUENCE_CODE)
+        if not self.is_delivery_note:
+            seq = self.env['ir.sequence'].get('account.out.invoice.ctrl')
+            return seq
+        return ''
 
-        # si aún no existe una secuencia para esta empresa, cree una
-        if not name:
-            IrSequence.sudo().create({
-                'prefix': '00-',
-                'name': 'Localización Venezolana nro control Factura cliente %s' % 1,
-                'code': SEQUENCE_CODE,
-                'implementation': 'no_gap',
-                'padding': 4,
-                'number_increment': 1,
-                'company_id': 1,
-            })
-            name = IrSequence.next_by_code(SEQUENCE_CODE)
-        #self.invoice_number_cli=name
-        return name
-
-    def get_refuld_number_cli(self):# nota de credito cliente
-        '''metodo que crea el Nombre del asiento contable si la secuencia no esta creada, crea una con el
-        nombre: 'l10n_ve_cuenta_retencion_iva'''
-
+    # nota de credito cliente
+    def get_refuld_number_cli(self):
         self.ensure_one()
-        SEQUENCE_CODE = 'l10n_ve_nro_factura_nota_credito_cliente'
-        company_id = 1
-        IrSequence = self.env['ir.sequence'].with_context(force_company=1)
-        name = IrSequence.next_by_code(SEQUENCE_CODE)
-
-        # si aún no existe una secuencia para esta empresa, cree una
-        if not name:
-            IrSequence.sudo().create({
-                'prefix': 'NCC/',
-                'name': 'Localización Venezolana Nota Credito Cliente %s' % 1,
-                'code': SEQUENCE_CODE,
-                'implementation': 'no_gap',
-                'padding': 4,
-                'number_increment': 1,
-                'company_id': 1,
-            })
-            name = IrSequence.next_by_code(SEQUENCE_CODE)
-        #self.refuld_number_cli=name
-        return name
+        if not self.is_delivery_note:
+            seq = self.env['ir.sequence'].get('account.credit.note.cli')
+            return seq
+        return ''
 
     def get_refuld_ctrl_number_cli(self):
-        '''metodo que crea el Nombre del asiento contable si la secuencia no esta creada, crea una con el
-        nombre: 'l10n_ve_cuenta_retencion_iva'''
-
         self.ensure_one()
-        SEQUENCE_CODE = 'l10n_ve_nro_control_nota_credito_cliente'
-        company_id = 1
-        IrSequence = self.env['ir.sequence'].with_context(force_company=1)
-        name = IrSequence.next_by_code(SEQUENCE_CODE)
+        if not self.is_delivery_note:
+            seq = self.env['ir.sequence'].get('account.credit.note.ctrl')
+            return seq
+        return ''
 
-        # si aún no existe una secuencia para esta empresa, cree una
-        if not name:
-            IrSequence.sudo().create({
-                'prefix': '00-',
-                'name': 'Localización Venezolana nro control Nota Credito Cliente %s' % 1,
-                'code': SEQUENCE_CODE,
-                'implementation': 'no_gap',
-                'padding': 4,
-                'number_increment': 1,
-                'company_id': 1,
-            })
-            name = IrSequence.next_by_code(SEQUENCE_CODE)
-        #self.refuld_number_cli=name
-        return name
-
-    def get_refuld_number_pro(self): #nota de debito Cliente
-        '''metodo que crea el Nombre del asiento contable si la secuencia no esta creada, crea una con el
-        nombre: 'l10n_ve_cuenta_retencion_iva'''
-
+    # nota de debito Cliente
+    def get_refuld_number_pro(self):
         self.ensure_one()
-        SEQUENCE_CODE = 'l10n_ve_nro_factura_nota_debito_cliente'
-        company_id = 1
-        IrSequence = self.env['ir.sequence'].with_context(force_company=1)
-        name = IrSequence.next_by_code(SEQUENCE_CODE)
-
-        # si aún no existe una secuencia para esta empresa, cree una
-        if not name:
-            IrSequence.sudo().create({
-                'prefix': 'NDC/',
-                'name': 'Localización Venezolana Nota Debito Cliente %s' % 1,
-                'code': SEQUENCE_CODE,
-                'implementation': 'no_gap',
-                'padding': 4,
-                'number_increment': 1,
-                'company_id': 1,
-            })
-            name = IrSequence.next_by_code(SEQUENCE_CODE)
-        #self.refuld_number_pro=name
-        return name
+        if not self.is_delivery_note:
+            seq = self.env['ir.sequence'].get('account.debit.note.cli')
+            return seq
+        return ''
 
     def get_refuld_ctrl_number_pro(self):
-        '''metodo que crea el Nombre del asiento contable si la secuencia no esta creada, crea una con el
-        nombre: 'l10n_ve_cuenta_retencion_iva'''
-
         self.ensure_one()
-        SEQUENCE_CODE = 'l10n_ve_nro_control_nota_debito_cliente'
-        company_id = 1
-        IrSequence = self.env['ir.sequence'].with_context(force_company=1)
-        name = IrSequence.next_by_code(SEQUENCE_CODE)
-
-        # si aún no existe una secuencia para esta empresa, cree una
-        if not name:
-            IrSequence.sudo().create({
-                'prefix': '00-',
-                'name': 'Localización Venezolana Nro control Nota debito cliente %s' % 1,
-                'code': SEQUENCE_CODE,
-                'implementation': 'no_gap',
-                'padding': 4,
-                'number_increment': 1,
-                'company_id': 1,
-            })
-            name = IrSequence.next_by_code(SEQUENCE_CODE)
-        #self.refuld_number_pro=name
-        return name
+        if not self.is_delivery_note:
+            seq = self.env['ir.sequence'].get('account.debit.note.ctrl')
+            return seq
+        return ''
 
     def _check_balanced(self):
         ''' Assert the move is fully balanced debit = credit.

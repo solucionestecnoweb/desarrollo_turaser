@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_account_move_cli" model="ir.sequence">
+            <field name="name">Factura Cliente - cli - VE</field>
+            <field name="code">account.out.invoice.cli</field>
+            <field name="implementation">standard</field>
+            <field name="prefix"></field>
+            <field name="padding">8</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">4143</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_move_ctrl" model="ir.sequence">
+            <field name="name">Factura Cliente - ctrl - VE</field>
+            <field name="code">account.out.invoice.ctrl</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">00-</field>
+            <field name="padding">6</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">6890</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_credit_note_cli" model="ir.sequence">
+            <field name="name">Notas de Credito - cli - VE</field>
+            <field name="code">account.credit.note.cli</field>
+            <field name="implementation">standard</field>
+            <field name="prefix"></field>
+            <field name="padding">8</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">73</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_credit_note_ctrl" model="ir.sequence">
+            <field name="name">Notas de Credito - ctrl - VE</field>
+            <field name="code">account.credit.note.ctrl</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">00-</field>
+            <field name="padding">4</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_debit_note_cli" model="ir.sequence">
+            <field name="name">Notas de Debito - cli - VE</field>
+            <field name="code">account.debit.note.cli</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">NDC/</field>
+            <field name="padding">4</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_account_debit_note_ctrl" model="ir.sequence">
+            <field name="name">Notas de Debito - ctrl - VE</field>
+            <field name="code">account.debit.note.ctrl</field>
+            <field name="implementation">standard</field>
+            <field name="prefix"></field>
+            <field name="padding">8</field>
+            <field name="active" eval="1"/>
+            <field name="number_increment">1</field>
+            <field name="number_next_actual">1</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
