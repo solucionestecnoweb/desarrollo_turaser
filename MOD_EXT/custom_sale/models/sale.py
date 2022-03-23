@@ -44,7 +44,7 @@ class SaleOrder(models.Model):
     })
 
     def action_payment_for_approval(self):
-        self.write({'state': 'service_in_approved'})
+        self.write({'state': 'service_for_approved'})
 
     def action_payment_approval(self):
         self.write({'state': 'service_approved'})
