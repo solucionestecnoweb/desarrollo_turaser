@@ -10,6 +10,10 @@
                 <xpath expr="//field[@name='payment_term_id']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+                
+                <xpath expr="//form/header/field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar"/>
+                </xpath>
 
                 <xpath expr="//button[last()]" position="after">
                     <button name="action_sale_register_payment" type="object" class="btn-primary"
