@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_partner_documents_agent_form" model="ir.ui.view">
+        <field name="name">res.partner.documents.agent.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="visa" string="Visa">
+                    <field name="visa_ids" mode="kanban" >
+                         <kanban class="o_kanban_small_column o_opportunity_kanban">
+                             <field name="id"/>
+                             <field name="partner_id"/>
+                             <field name="country_id"/>
+                             <field name="name"/>
+                             <field name="number_visa"/>
+                             <field name="issue_date"/>
+                             <field name="expiration_date"/>
+                             <field name="image_128"/>
+                             <field name="is_company"/>
+                             <templates>
+                                 <t t-name="kanban-box">
+                                     <div t-attf-class="oe_kanban_global_click">
+                                        <div class="oe_kanban_content">
+								            <div class="o_kanban_record_title">
+                                                <div class="oe_kanban_bottom_left">
+                                                    <div class="o_kanban_image">
+                                                        <field alt="Visa image" name="image_128" widget='image' t-if="record.image_128.raw_value" t-att-src="kanban_image('visa', 'image_128', record.id.raw_value)"/>
+                                                         <t t-if="!record.image_128.raw_value">
+                                                             <img alt="visa" t-if="record.is_company.raw_value === false or record.is_company.raw_value === true" t-att-src='_s + "/sale_documents_agent/static/img/visa.png"'/>
+                                                         </t>
+                                                    </div>
+                                                </div>
+                                                <div class="oe_kanban_bottom_right">
+                                                    <strong>
+                                                        <span style="color:#012169">Tipo: <field name="name"/></span>
+                                                    </strong>
+                                                </div>
+                                                <div class="oe_kanban_bottom_left">
+                                                    <strong>
+                                                        <span style="color:#012169">Nro. Visa: [<field name="number_visa"/>]</span>
+                                                    </strong>
+                                                </div>
+                                            </div>
+                                            <div class="o_kanban_record_subtitle">
+    									        <div class="o_kanban_record_bottom">
+										            <div class="oe_kanban_bottom_left">
+                                                        <span><strong>Fecha de Emision:</strong> <field name="issue_date"/></span>
+										            </div>
+                                                    <div class="oe_kanban_bottom_left">
+                                                        <span><strong>Fecha de Vencimiento:</strong> <field name="expiration_date"/></span>
+                                                    </div>
+                                                    <div class="oe_kanban_bottom_left">
+                                                        <span><strong>Pais:</strong> <field name="country_id"/></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                 </t>
+                             </templates>
+                         </kanban>
+                        <form name="v" string="visa">
+                            <sheet>
+                                <group col="12">
+                                    <group colspan="5">
+                                        <field name="name"/>
+                                        <field name="number_visa"/>
+                                        <field name="issue_date"/>
+                                    </group>
+                                    <group colspan="5">
+                                        <field name="expiration_date"/>
+                                        <field name="country_id"/>
+                                        <field name="partner_id" invisible="1"/>
+                                    </group>
+                                    <group colspan="1">
+                                        <field name="image_128" widget="image" class="oe_avatar" nolabel="1" options="{'image_preview': 'image_128'}"/>
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <page name="passport" string="Pasaporte">
+                     <field name="passport_ids" mode="kanban">
+                         <kanban class="o_kanban_small_column o_opportunity_kanban">
+                             <field name="id"/>
+                             <field name="partner_id"/>
+                             <field name="name"/>
+                             <field name="issue_date"/>
+                             <field name="expiration_date"/>
+                             <field name="image_128"/>
+                             <field name="is_company"/>
+                             <templates>
+                                 <t t-name="kanban-box">
+                                     <div t-attf-class="oe_kanban_global_click">
+                                        <div class="oe_kanban_content">
+								            <div class="o_kanban_record_title">
+                                                <div class="oe_kanban_bottom_left">
+                                                    <div class="o_kanban_image">
+                                                        <field alt="Passport image" name="image_128" widget='image' t-if="record.image_128.raw_value" t-att-src="kanban_image('passport', 'image_128', record.id.raw_value)"/>
+                                                         <t t-if="!record.image_128.raw_value">
+                                                             <img alt="pasaporte" t-if="record.is_company.raw_value === false or record.is_company.raw_value === true" t-att-src='_s + "/sale_documents_agent/static/img/passport.png"'/>
+                                                         </t>
+                                                    </div>
+                                                </div>
+                                                <div class="oe_kanban_bottom_right">
+                                                    <strong>
+                                                        <span style="color:#012169">Nro. Pasaporte: [<field name="name"/>]</span>
+                                                    </strong>
+                                                </div>
+                                            </div>
+                                            <div class="o_kanban_record_subtitle">
+    									        <div class="o_kanban_record_bottom">
+										            <div class="oe_kanban_bottom_left">
+                                                        <span><strong>Fecha de Emision:</strong> <field name="issue_date"/></span>
+										            </div>
+                                                    <div class="oe_kanban_bottom_left">
+                                                        <span><strong>Fecha de Vencimiento:</strong> <field name="expiration_date"/></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                 </t>
+                             </templates>
+                         </kanban>
+                         <form string="Pasaporte">
+                            <sheet>
+                                <group col="12">
+                                    <group colspan="5">
+                                        <field name="name"/>
+                                        <field name="issue_date"/>
+                                    </group>
+                                    <group colspan="5">
+                                        <field name="expiration_date"/>
+                                        <field name="partner_id" invisible="1"/>
+                                    </group>
+                                     <group colspan="1">
+                                         <field name="image_128" widget="image" class="oe_avatar" nolabel="1" options="{'image_preview': 'image_128'}"/>
+                                     </group>
+                                </group>
+                            </sheet>
+                        </form>
+                     </field>
+                </page>
+            </xpath>
+
+            <xpath expr="//form/sheet/group/group[1]/div[1]" position="after">
+                <field name="pax_id" options="{'no_open': True, 'no_create': True}" required="1"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

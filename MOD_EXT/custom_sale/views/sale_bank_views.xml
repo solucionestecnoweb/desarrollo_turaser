@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bank_view_form" model="ir.ui.view">
+            <field name="name">bank.view.form</field>
+            <field name="model">sale.order.bank</field>
+            <field name="arch" type="xml">
+                <form string="bank">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"  string="Activo"  widget="boolean_toggle"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bank_view_tree" model="ir.ui.view">
+            <field name="name">bank.view.tree</field>
+            <field name="model">sale.order.bank</field>
+            <field name="arch" type="xml">
+                <tree string="bank">
+                    <field name="name" decoration-bf="1"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_bank" model="ir.actions.act_window">
+            <field name="name">Bancos</field>
+            <field name="res_model">sale.order.bank</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

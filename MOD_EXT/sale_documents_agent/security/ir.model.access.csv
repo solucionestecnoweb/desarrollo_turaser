@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_type_pax,type.pax,model_type_pax,,1,1,1,1
+access_type_baggage,type.baggage,model_type_baggage,,1,1,1,1
+access_visa,visa,model_visa,,1,1,1,1
+access_passport,passport,model_passport,,1,1,1,1
+access_promotion,promotion,model_promotion,,1,1,1,1

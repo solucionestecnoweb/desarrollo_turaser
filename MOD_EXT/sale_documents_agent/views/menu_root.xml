@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_type_pax"
+                  name="Tipo de Pax"
+                  parent="sale.menu_sale_config"
+                  action="action_type_pax"
+                  sequence="40"
+                  groups="sales_team.group_sale_manager"/>
+
+        <menuitem id="menu_type_baggage"
+                  name="Tipo de Equipaje"
+                  parent="sale.menu_sale_config"
+                  action="action_type_baggage"
+                  sequence="41"
+                  groups="sales_team.group_sale_manager"/>
+
+        <menuitem id="menu_city_sale"
+                  name="Codigo de Ciudad"
+                  parent="sale.menu_sale_config"
+                  action="base_address_city.action_res_city_tree"
+                  sequence="42"
+                  groups="sales_team.group_sale_manager"/>
+
+        <menuitem id="menu_promotion"
+                  name="Promociones"
+                  parent="sale.menu_sale_config"
+                  action="action_promotion"
+                  sequence="43"
+                  groups="sales_team.group_sale_manager"/>
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_service_type_plan,product.service.type.plan,model_product_service_type_plan,,1,1,1,1
+access_product_service_location,product.service.location,model_product_service_location,,1,1,1,1
+access_product_service_room,product.service.room,model_product_service_room,,1,1,1,1
+access_product_service_gds,product.service.gds,model_product_service_gds,,1,1,1,1
+access_product_service_cabin,product.service.cabin,model_product_service_cabin,,1,1,1,1
+access_product_service_flight_itinerary,product.service.flight.itinerary,model_product_service_flight_itinerary,,1,1,1,1
+access_product_service_pasarel,product.service.pasarel,model_product_service_pasarel,,1,1,1,1
+access_product_service_code,product.service.code,model_product_service_code,,1,1,1,1
+access_product_service_event,product.service.event,model_product_service_event,,1,1,1,1
+access_product_service_ticket,product.service.ticket,model_product_service_ticket,,1,1,1,1

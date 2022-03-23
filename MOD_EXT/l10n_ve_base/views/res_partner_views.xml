@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_partner_inherit_form" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(base.res_lang_act_window)d']" position="replace"/>
+            <xpath expr="//field[@name='category_id']" position="replace"/>
+            <xpath expr="//field[@name='vat']" position="replace"/>
+
+<!--            <xpath expr="//field[@name='phone']" position="attributes">-->
+<!--                <attribute name="required">1</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='mobile']" position="attributes">-->
+<!--                <attribute name="required">1</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='website']" position="after">
+                <field name="gender"/>
+            </xpath>
+            <xpath expr="//field[@name='lang']" position="attributes">
+                <attribute name="options">{'no_open': True, 'no_create': True}</attribute>
+            </xpath>
+
+            <xpath expr="//form/sheet/group/group[1]/div[1]" position="after">
+                <field name="category_id" string="Etiquetas" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Tags..."/>
+                <field name="birth_date"/>
+            </xpath>
+
+            <xpath expr="//form/sheet/group/group[1]/field[1]" position="after">
+                <field name="travel_agency"/>
+                <field name="vat" string="RIF" placeholder="e.g. BE0477472701" attrs="{'readonly': [('parent_id','!=',False)]}"/>
+                <field name="vat2" string="Numero de Cedula" placeholder="e.g. BE0477472701" attrs="{'readonly': [('parent_id','!=',False)]}"/>
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group[1]/group[2]" position="inside">
+                <field name="vat2" string="Cedula de Identidad" attrs="{'invisible': [('type','!=', 'contact')]}"/>
+            </xpath>
+            <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="after">
+                    <field name="seller"/>
+                </xpath>
+        </field>
+    </record>
+</odoo>

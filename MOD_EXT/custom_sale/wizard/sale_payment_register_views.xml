@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="order_payment_register_wizard_view_form" model="ir.ui.view">
+            <field name="name">sale.order.payment.register.wizard.view.form</field>
+            <field name="model">sale.order.payment.register</field>
+            <field name="arch" type="xml">
+                <form string="payment register">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="sale_id" invisible="1"/>
+                                <field name="partner_id"/>
+                                <field name="payment_method_id"/>
+                                <field name="bank_id"/>
+                                <field name="vat2"/>
+                                <field name="date"/>
+                            </group>
+                            <group>
+                                <field name="cardholder"/>
+                                <field name="card_type_id"/>
+                                <field name="account_holder"/>
+                                <field name="code_security"/>
+                                <field name="number_approval"/>
+                                <field name="passport_ids" widget="many2many_tags"/>
+                                <field name="amount"/>
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="create_payment" string="Crear Pago" type="object"
+                                    class="btn-primary"/>
+                            <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

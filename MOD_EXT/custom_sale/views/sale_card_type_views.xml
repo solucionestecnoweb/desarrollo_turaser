@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="card_type_view_form" model="ir.ui.view">
+            <field name="name">card.type.view.form</field>
+            <field name="model">sale.order.card.type</field>
+            <field name="arch" type="xml">
+                <form string="card type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"  string="Activo"  widget="boolean_toggle"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="card_type_view_tree" model="ir.ui.view">
+            <field name="name">card.type.view.tree</field>
+            <field name="model">sale.order.card.type</field>
+            <field name="arch" type="xml">
+                <tree string="card type">
+                    <field name="name" decoration-bf="1"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_card_type" model="ir.actions.act_window">
+            <field name="name">Tipos de Tarjetas</field>
+            <field name="res_model">sale.order.card.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>

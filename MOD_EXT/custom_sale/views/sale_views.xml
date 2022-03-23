@@ -1,18 +1,75 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="sale_order_view_form_vendor" model="ir.ui.view">
-            <field name="name">sale.order.vendor.view.form</field>
+        <record id="ts_view_order_inherit_form" model="ir.ui.view">
+            <field name="name">sale.order.inherit.form</field>
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-              <xpath expr="//field[@name='user_id']" position="replace"/>
-              <xpath expr="//field[@name='partner_invoice_id']" position="after">
-                <field name="user_id" string="Vendedor" domain="[('share', '=', False)]" widget="many2one_avatar_user"/>
-              </xpath>
+
+                <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[last()]" position="after">
+                    <button name="action_sale_register_payment" type="object" class="btn-primary"
+                            string="Registrar Pago" attrs="{'invisible': [('state', 'not in', ('sale'))]}"/>
+
+                    <button name="action_payment_for_approval" type="object" class="btn-primary"
+                            string="Confirmar Pago" attrs="{'invisible': [('state', 'not in', ('payment_pending'))]}"/>
+
+                    <button name="action_payment_approval" type="object" class="btn-primary" string="Liberar Voucher"
+                            attrs="{'invisible': [('state', 'not in', ('service_for_approved'))]}"/>
+
+                    <button name="action_voucher_issue" type="object" class="btn-primary" string="Emitir Voucher"
+                            attrs="{'invisible': [('state', 'not in', ('service_approved'))]}"/>
+
+                    <button name="action_validate_voucher" type="object" class="btn-primary" string="Validar"
+                            attrs="{'invisible': [('state', 'not in', ('service_issue_voucher'))]}"/>
+
+                    <button name="action_validate_pre_invoice" type="object" class="btn-primary" string="Validar"
+                            attrs="{'invisible': [('state', 'not in', ('voucher_issue'))]}"/>
+                </xpath>
+
+                <xpath expr="//group[@name='order_details']" position="after">
+                    <group name="order_details_partner">
+                        <field name="company_type" invisible="1"/>
+                        <label for="vat2" string="Numero de cedula" attrs="{'invisible': [('company_type', 'in', ('person'))]}"/>
+                        <div class="o_row" attrs="{'invisible': [('company_type', 'in', ('person'))]}">
+                            <field name="vat2"/>
+                            <strong><span class="p-2">R.I.F.</span></strong>
+                            <field name="vat"/>
+                        </div>
+                        <field name="vat" attrs="{'invisible': ['|', ('company_type', 'in', ('company')), ('partner_id', '=', False)]}"/>
+                        <field name="email"/>
+                        <label for="promotion_id"/>
+                        <div class="o_row">
+                            <field name="promotion_id" class="oe_inline"/>
+                            <strong><span>Nro. de Promocion</span></strong>
+                            <field class="oe_inline" name="number_promotion"/>
+                        </div>
+                        <field name="pnr" style="width: 70%%"/>
+                    </group>
+
+                    <group name="order_accessor">
+                        <field name="user_id" string="Comercial" domain="[('share', '=', False)]" options="{'no_create': True}"/>
+                        <field name="user_email"/>
+                        <field name="phone" string="Telefono de Agencia"/>
+                        <field name="mobile" string="Celular Corporativo"/>
+                        <field name="seller_id" options="{'no_create': True}" domain="[('seller', '=', True)]"/>
+                        <label for="is_service" string="Extensión de Servicio"/>
+                        <div class="o_row">
+                            <field name="is_service"/>
+                            <strong><span class="p-2">Documento de Origen</span></strong>
+                            <field class="oe_inline" name="parent_id" domain="[('partner_id', '=', partner_id)]"/>
+                        </div>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                     <field name="sale_payment_id" string="Metodo de Pago"  readonly="1"/>
+                </xpath>
             </field>
         </record>
     </data>
 </odoo>
-
-

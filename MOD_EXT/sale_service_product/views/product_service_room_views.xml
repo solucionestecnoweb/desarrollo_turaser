@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="service_room_view_form" model="ir.ui.view">
+            <field name="name">service.room.view.form</field>
+            <field name="model">product.service.room</field>
+            <field name="arch" type="xml">
+                <form string="service room">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="active"  string="Activo"  widget="boolean_toggle"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="service_room_view_tree" model="ir.ui.view">
+            <field name="name">service.room.view.tree</field>
+            <field name="model">product.service.room</field>
+            <field name="arch" type="xml">
+                <tree string="service room">
+                    <field name="name" decoration-bf="1"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_service_room" model="ir.actions.act_window">
+            <field name="name">Tipo de Habitacion</field>
+            <field name="res_model">product.service.room</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+    </data>
+</odoo>
