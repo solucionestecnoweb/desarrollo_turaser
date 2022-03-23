@@ -59,6 +59,7 @@
 
                         <field name="start_date" string="Fecha de Retiro" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
                         <field name="end_date" string="Fecha de Entrega" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
+                        <field name="start_date" string="Fecha" attrs="{'invisible': [('type_service', 'not in', ('excursion'))]}"/>
                         <field name="product_gds_id" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
                         <field name="product_cabin_id" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
                         <field name="product_itinerary_id" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
