@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_move_islr_form" model="ir.ui.view">
+            <field name="name">account.invoice.islrform</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="is_control_unique" invisible="1"/>
+                    <field name="is_manual"/>
+                    <field name="invoice_number_next" attrs="{'readonly': [('is_manual', '=', False)]}"/>
+                    <field name="invoice_number_control" attrs="{'readonly': [('is_manual', '=', False)]}"/>
+                    <field name="invoice_number_unique" readonly="1"
+                           attrs="{'invisible': [('is_control_unique', '=', False)]}"/>
+                    <field name="delivery_note_next_number"
+                           attrs="{'invisible': ['|',
+                           ('is_delivery_note', '=', False),
+                           ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'))]}"
+                           readonly="1"
+                    />
+                    <field name="is_delivery_note" string="Es nota de Entrega?" widget="boolean_toggle"
+                           attrs="{'invisible': ['|',
+                           ('move_type', 'in',('in_invoice', 'in_refund', 'in_receipt')),
+                           ('move_type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund'))],
+                           'readonly':[('state', '=', 'posted')]}"
+                    />
+                </xpath>
+
+                <xpath expr="//group[@id='header_right_group']" position="inside">
+                     <label for="hide_book" class="d-flex"/>
+                     <div>
+                        <field name="hide_book" widget="boolean_toggle"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

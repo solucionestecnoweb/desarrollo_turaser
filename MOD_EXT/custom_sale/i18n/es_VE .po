@@ -1254,7 +1254,7 @@ msgstr "Configuración"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_cancel_view_form
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Confirm"
-msgstr "Pre-Confirmar"
+msgstr "Confirmar Servicio"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_res_config_settings__confirmation_template_id
@@ -1297,7 +1297,7 @@ msgstr "Fecha de Creación"
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 #: model_terms:ir.ui.view,arch_db:sale.view_sale_advance_payment_inv
 msgid "Create Invoice"
-msgstr "Emitir Pre-Factura"
+msgstr "Crear Factura"
 
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.product_template_action
@@ -2837,7 +2837,7 @@ msgstr "Servicios"
 #: model:ir.ui.menu,name:sale.menu_sale_order_invoice
 #: model_terms:ir.ui.view,arch_db:sale.crm_team_salesteams_view_kanban
 msgid "Orders to Invoice"
-msgstr "Pedidos a Facturar"
+msgstr "Servicios a Facturar"
 
 #. module: sale
 #: model:ir.actions.act_window,name:sale.action_orders_upselling
@@ -3441,7 +3441,7 @@ msgstr "Pedido de venta realizado"
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 #, python-format
 msgid "Sales Order"
-msgstr "Cotización de Servicio Pre-Confirmada"
+msgstr "Servicio Aprobado"
 
 #. module: sale
 #: model:ir.model,name:sale.model_sale_order_cancel

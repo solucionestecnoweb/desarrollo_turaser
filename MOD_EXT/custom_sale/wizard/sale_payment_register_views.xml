@@ -25,6 +25,9 @@
                                 <field name="passport_ids" widget="many2many_tags"/>
                                 <field name="amount"/>
                             </group>
+                            <div>
+                                <field name="image_1920" nolabel="1" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
+                            </div>
                         </group>
                         <footer>
                             <button name="create_payment" string="Crear Pago" type="object"

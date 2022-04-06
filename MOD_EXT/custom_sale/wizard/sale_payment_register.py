@@ -20,6 +20,7 @@ class SaleOrderPaymentRegister(models.Model):
     account_holder = fields.Char(string='Titular de Cuenta')
     number_approval = fields.Char(string='Numero de aprobacion')
     amount = fields.Float(string='Monto')
+    image_1920 = fields.Image(string='imagen')
 
     def create_payment(self):
         payment_val = {
@@ -34,10 +35,11 @@ class SaleOrderPaymentRegister(models.Model):
             'account_holder': self.account_holder,
             'number_approval': self.number_approval,
             'amount': self.amount,
+            'image_1920': self.image_1920,
         }
         payment = self.env['sale.order.payment'].sudo().create(payment_val)
         payment.sale_id.write({
             'sale_payment_id': payment.id,
-            'state': 'payment_pending'
+            'state': 'payment_pending',
         })
         return payment

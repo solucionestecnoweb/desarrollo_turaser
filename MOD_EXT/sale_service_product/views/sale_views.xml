@@ -6,7 +6,6 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
-
                 <xpath expr="//field[@name='order_line']/tree" position="attributes">
                     <attribute name="editable"/>
                 </xpath>
@@ -22,25 +21,38 @@
                      <attribute name="invisible">1</attribute>
                 </xpath>
 
+                <xpath expr="//field[@name='order_line']/form//field[@name='product_uom']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/form//label[@for='name']" position="replace"/>
+                <xpath expr="//field[@name='order_line']/form//field[@name='name']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/form//field[@name='tax_id']" position="after">
+                    <field name="price_subtotal"/>
+                </xpath>
+
                 <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/form/group/group[1]/field[@name='product_id']" position="after">
-                    <field name="partner_id" attrs="{'invisible': [('type_service', 'in', ('tickets', 'excursion', 'Transfer'))]}"/>
-                    <field name="product_location_id"  attrs="{'invisible': [('type_service', 'in', ('tickets'))]}"/>
+                    <field name="seller_ids" attrs="{'invisible': [('type_service', 'in', ('tickets', 'excursion', 'Transfer'))]}" widget="many2many_tags"/>
+                    <field name="product_location"  attrs="{'invisible': [('type_service', 'in', ('tickets'))]}"/>
+                    <field name="state_id" string="Ubicacion" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
+                    <field name="product_code_id" string="Codigo" attrs="{'invisible': [('type_service', 'not in', ('tickets'))]}"/>
+                    <field name="product_event_id" string="Evento" attrs="{'invisible': [('type_service', 'not in', ('tickets'))]}"/>
+                    <field name="city_id2" attrs="{'invisible': [('type_service', 'not in', ('hotel', 'excursion'))]}"/>
+                    <field name="city_id" attrs="{'invisible': [('type_service', 'not in', ('ticket', 'Transfer'))]}"/>
+                    <field name="city_id2" attrs="{'invisible': [('type_service', 'not in', ('ticket', 'Transfer'))]}"/>
                     <field name="product_plan_id" attrs="{'invisible': [('type_service', 'in', ('tickets', 'excursion', 'Transfer', 'ticket', 'hotel'))]}"/>
                     <field name="drive_id" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
                     <field name="product_age" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
                 </xpath>
 
-                 <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/form/group/group[1]/field[@name='tax_id']" position="after">
-                     <field name="state_id" string="Ubicacion" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
-                     <field name="product_code_id" string="Codigo" attrs="{'invisible': [('type_service', 'not in', ('tickets'))]}"/>
-                     <field name="product_event_id" string="Evento" attrs="{'invisible': [('type_service', 'not in', ('tickets'))]}"/>
-                     <field name="city_id2" attrs="{'invisible': [('type_service', 'not in', ('hotel', 'excursion'))]}"/>
-                 </xpath>
 
                 <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/form/group/group[1]" position="after">
                     <group name="service_product">
                         <field name="product_rom_id" attrs="{'invisible': [('type_service', 'not in', ('hotel'))]}"/>
-                        <field name="product_pasarel_id" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
+                         <field name="product_ticket" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
                         <field name="partner_ids" widget="many2many_tags" attrs="{'invisible': [('type_service', 'in', ('car'))]}"/>
 
                         <label for="start_date" attrs="{'invisible': [('type_service', 'not in', ('hotel'))]}"/>
@@ -50,21 +62,14 @@
                             <field name="end_date"/>
                         </div>
 
-                        <label for="city_id" string="Origen" attrs="{'invisible': [('type_service', 'not in', ('ticket', 'Transfer'))]}"/>
-                        <div name="service_street" class="o_row" attrs="{'invisible': [('type_service', 'not in', ('ticket', 'Transfer'))]}">
-                            <field name="city_id"/>
-                            <strong><span class="p-2">Destino</span></strong>
-                            <field name="city_id2"/>
-                        </div>
-
                         <field name="start_date" string="Fecha de Retiro" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
                         <field name="end_date" string="Fecha de Entrega" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
                         <field name="start_date" string="Fecha" attrs="{'invisible': [('type_service', 'not in', ('excursion'))]}"/>
-                        <field name="product_gds_id" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
                         <field name="product_cabin_id" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
-                        <field name="product_itinerary_id" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
+                        <field name="product_itinerary" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
+                         <field name="product_pasarel" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
                         <field name="service_charge" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
-                        <field name="product_ticket_id" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
+                        <field name="product_gds" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
                         <field name="pax_id" widget="radio" attrs="{'invisible': [('type_service', 'in', ('car', 'excursion', 'Transfer'))]}"/>
                         <field name="type_service" invisible="1"/>
                     </group>

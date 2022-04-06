@@ -18,36 +18,45 @@ class SaleOrder(models.Model):
     user_email = fields.Char(related='user_id.partner_id.email')
 
     pnr = fields.Char(string="PNR")
+    product_location_in = fields.Char(string='localizador/PNR-Interno')
     is_service = fields.Boolean(string="Extension de Servicio")
     parent_id = fields.Many2one('sale.order', string="Documento origen")
     seller_id = fields.Many2one('res.partner', string="Enterado por")
     sale_payment_id = fields.Many2one('sale.order.payment', string="Pago")
     promotion_id = fields.Many2one('promotion', string="Promocion")
     number_promotion = fields.Char(string="Nro. de Promocion")
-    state = fields.Selection(selection_add=[
+    state = fields.Selection([
+        ('draft', 'Quotation'),
+        ('sent', 'Quotation Sent'),
+        ('pre_confirm', 'Cotización de Servicio Pre-Confirmada'),
         ('payment_pending', 'Servicio Pendiente de Pago'),
         ('service_for_approved', 'Servicio por Aprobar'),
-        ('service_approved', 'Servicio Aprobado'),
+        ('sale', 'Sales Order'),
         ('service_issue_voucher', 'Servicio por Emitir Voucher'),
         ('voucher_issue', 'Voucher Emitido'),
         ('pre_invoice', 'Pre-Factura'),
         ('invoice', 'Factura'),
-    ],
-        ondelete={
-            'payment_pending': 'set default',
-            'service_for_approved': 'set default',
-            'service_approved': 'set default',
-            'service_issue_voucher': 'set default',
-            'voucher_issue': 'set default',
-            'pre_invoice': 'set default',
-            'invoice': 'set default',
-    })
+        ('done', 'Locked'),
+        ('cancel', 'Cancelled'),
+        ], string='Status', readonly=True, copy=False, index=True, tracking=3, default='draft')
+
+    @api.model
+    def create(self, vals):
+        """
+        This method is create for sequence wise name.
+        :param vals: values
+        :return:super
+        """
+        res = super(SaleOrder, self).create(vals)
+        res.product_location_in = self.env['ir.sequence'].next_by_code('sale.order.location')
+        return res
+
+
+    def action_pre_confirm(self):
+        self.write({'state': 'pre_confirm'})
 
     def action_payment_for_approval(self):
         self.write({'state': 'service_for_approved'})
-
-    def action_payment_approval(self):
-        self.write({'state': 'service_approved'})
 
     def action_voucher_issue(self):
         self.write({'state': 'service_issue_voucher'})

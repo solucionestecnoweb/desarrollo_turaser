@@ -22,6 +22,7 @@ class SaleOrderPayment(models.Model):
     account_holder = fields.Char(string='Titular de Cuenta')
     number_approval = fields.Char(string='Numero de aprobacion')
     amount = fields.Float(string='Monto')
+    image_1920 = fields.Image(string='imagen')
 
     @api.model
     def create(self, vals):

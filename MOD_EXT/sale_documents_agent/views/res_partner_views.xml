@@ -145,11 +145,6 @@
                      </field>
                 </page>
             </xpath>
-
-            <xpath expr="//form/sheet/group/group[1]/div[1]" position="after">
-                <field name="pax_id" options="{'no_open': True, 'no_create': True}" required="1"/>
-            </xpath>
-
         </field>
     </record>
 </odoo>
