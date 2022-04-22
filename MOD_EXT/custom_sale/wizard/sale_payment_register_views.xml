@@ -22,7 +22,6 @@
                                 <field name="account_holder"/>
                                 <field name="code_security"/>
                                 <field name="number_approval"/>
-                                <field name="passport_ids" widget="many2many_tags"/>
                                 <field name="amount"/>
                             </group>
                             <div>

@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page name="visa" string="Visa">
+                <page name="visa" string="Visa"  attrs="{'invisible': [('company_type','=', 'company')]}">
                     <field name="visa_ids" mode="kanban" >
                          <kanban class="o_kanban_small_column o_opportunity_kanban">
                              <field name="id"/>
@@ -81,7 +81,7 @@
                         </form>
                     </field>
                 </page>
-                <page name="passport" string="Pasaporte">
+                <page name="passport" string="Pasaporte"  attrs="{'invisible': [('company_type','=', 'company')]}">
                      <field name="passport_ids" mode="kanban">
                          <kanban class="o_kanban_small_column o_opportunity_kanban">
                              <field name="id"/>

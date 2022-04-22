@@ -1,6 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_sale_order_payment_method,sale.order.payment.method,model_sale_order_payment_method,,1,1,1,1
-access_sale_order_payment,sale.order.payment,model_sale_order_payment,,1,0,0,0
+access_sale_order_payment,sale.order.payment,model_sale_order_payment,,1,1,0,0
 access_sale_order_payment_register,sale.order.payment.register,model_sale_order_payment_register,,1,1,1,1
 access_sale_order_card_type,sale.order.card.type,model_sale_order_card_type,,1,1,1,1
 access_sale_order_bank,sale.order.bank,model_sale_order_bank,,1,1,1,1

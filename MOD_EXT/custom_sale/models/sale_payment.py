@@ -22,7 +22,9 @@ class SaleOrderPayment(models.Model):
     account_holder = fields.Char(string='Titular de Cuenta')
     number_approval = fields.Char(string='Numero de aprobacion')
     amount = fields.Float(string='Monto')
-    image_1920 = fields.Image(string='imagen')
+    image_1920 = fields.Image(string='imagen', store=True)
+    state = fields.Selection([('draft', 'Borrador'), ('confirmed', 'Pago confimardo'), ('cancel', 'Cancelado')],
+                             string='Status', readonly=True, copy=False, index=True, tracking=3, default='draft')
 
     @api.model
     def create(self, vals):
@@ -34,6 +36,13 @@ class SaleOrderPayment(models.Model):
         res = super(SaleOrderPayment, self).create(vals)
         res.name = self.env['ir.sequence'].next_by_code('sale.order.payment')
         return res
+
+    def action_payment_for_approval(self):
+        self.write({'state': 'confirmed'})
+        self.sale_id.write({'state': 'service_for_approved'})
+
+    def action_cancel(self):
+        self.write({'state': 'cancel'})
 
 
 class SaleOrderPaymentMethod(models.Model):

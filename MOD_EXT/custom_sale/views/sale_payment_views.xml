@@ -6,6 +6,13 @@
             <field name="model">sale.order.payment</field>
             <field name="arch" type="xml">
                 <form string="sale payment">
+                    <header>
+                        <button name="action_payment_for_approval"
+                                string="Confirmar Pago" class="oe_highlight" type="object"  attrs="{'invisible': [('state', '=', 'confirmed')]}"/>
+                        <button name="action_cancel" string="Cancelar" class="oe_highlight" type="object"
+                                attrs="{'invisible': [('state', '=', 'cancel')]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <sheet>
                         <group>
                             <group>
@@ -22,7 +29,6 @@
                                 <field name="account_holder"/>
                                 <field name="code_security"/>
                                 <field name="number_approval"/>
-                                <field name="passport_ids" widget="many2many_tags"/>
                                 <field name="amount"/>
                             </group>
                             <div>

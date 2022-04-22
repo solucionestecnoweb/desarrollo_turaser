@@ -18,7 +18,7 @@ class SaleOrder(models.Model):
     user_email = fields.Char(related='user_id.partner_id.email')
 
     pnr = fields.Char(string="PNR")
-    product_location_in = fields.Char(string='localizador/PNR-Interno')
+    product_location_in = fields.Char(string='localizador Interno')
     is_service = fields.Boolean(string="Extension de Servicio")
     parent_id = fields.Many2one('sale.order', string="Documento origen")
     seller_id = fields.Many2one('res.partner', string="Enterado por")
@@ -51,12 +51,11 @@ class SaleOrder(models.Model):
         res.product_location_in = self.env['ir.sequence'].next_by_code('sale.order.location')
         return res
 
-
     def action_pre_confirm(self):
         self.write({'state': 'pre_confirm'})
 
-    def action_payment_for_approval(self):
-        self.write({'state': 'service_for_approved'})
+    # def action_payment_for_approval(self):
+    #     self.write({'state': 'service_for_approved'})
 
     def action_voucher_issue(self):
         self.write({'state': 'service_issue_voucher'})
@@ -64,8 +63,8 @@ class SaleOrder(models.Model):
     def action_validate_voucher(self):
         self.write({'state': 'voucher_issue'})
 
-    def action_validate_pre_invoice(self):
-        self.write({'state': 'pre_invoice'})
+    # def action_validate_pre_invoice(self):
+    #     self.write({'state': 'pre_invoice'})
 
     def action_sale_register_payment(self):
         return {

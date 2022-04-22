@@ -13,14 +13,13 @@ class SaleOrderPaymentRegister(models.Model):
     bank_id = fields.Many2one('sale.order.bank', string='Banco')
     payment_method_id = fields.Many2one('sale.order.payment.method', string='Metodo de Pago')
     vat2 = fields.Char(related='partner_id.vat2', string='Numero de Cedula')
-    passport_ids = fields.One2many('passport', related='partner_id.passport_ids', string='Pasaporte', readonly=False)
     date = fields.Date(string='Fecha')
     cardholder = fields.Char(string='Tarjetahabiente')
     code_security = fields.Char(string='Codigo de Seguridad')
     account_holder = fields.Char(string='Titular de Cuenta')
     number_approval = fields.Char(string='Numero de aprobacion')
     amount = fields.Float(string='Monto')
-    image_1920 = fields.Image(string='imagen')
+    image_1920 = fields.Image(string='imagen', store=True)
 
     def create_payment(self):
         payment_val = {

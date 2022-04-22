@@ -20,8 +20,9 @@ class SaleOrderLine(models.Model):
     product_ticket = fields.Char(string='Boleto')
     product_pasarel = fields.Integer(string='Cargo pasarel')
     state_id = fields.Many2one('res.country.state', string='Ubicacion')
-    partner_ids = fields.Many2many('res.partner', string='Pasajeros')
-    start_date = fields.Date(string='Fecha de Inc')
+    # partner_ids = fields.Many2many('res.partner', string='Pasajeros')
+    number_passenger = fields.Integer(string='Cantidad de Pasajeros')
+    start_date = fields.Date(string='Fecha de In')
     end_date = fields.Date(string='Fecha de Out')
     city_id = fields.Many2one('res.city', 'Origen')
     city_id2 = fields.Many2one('res.city', 'destino')
@@ -32,9 +33,9 @@ class SaleOrderLine(models.Model):
     def _onchange_seller(self):
         if not self. product_id:
             return
-        supplierinfo = self.env['product.supplierinfo'].search([('product_tmpl_id', '=', self.product_id.product_tmpl_id.id)])
+        supplierinfo = self.env['product.supplierinfo'].search([
+            ('product_tmpl_id', '=', self.product_id.product_tmpl_id.id)])
         self.seller_ids = supplierinfo.ids
-
 
     @api.depends('order_id.state')
     def _compute_invoice_status(self):

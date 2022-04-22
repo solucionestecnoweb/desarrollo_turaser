@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_sale_order_voucher">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <style>
+                        .border-left-right-top-bottom{
+                            border-bottom: 2px solid black !important;
+                            border-top: 2px solid black !important;
+                            border-right: 2px solid black !important;
+                            border-left: 2px solid black !important;
+                        }
+                        .div-hr{
+                            width: 100%;
+                            border-bottom: 2px solid black;
+                            line-height: 0.2em;
+                            margin: 10px 0 20px;
+                        }
+                        .div-card {
+                            width: 15%;
+                            padding: 12px !important;
+                            border: 2px solid black !important;
+                            margin: 0 !important;
+                        }
+                    </style>
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <div class="row border-left-right-top-bottom">
+                                <div class="col-12 text-center bg-secondary text-dark">
+                                    <strong><p>DATOS DEL TARJETAHABIENTE</p></strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-7" style="margin-top:40px;">
+                                    <div class="div-hr">
+                                        <span style="padding-right:40px; background:#fff;">Nombre</span>
+                                    </div>
+                                    <div class="div-hr">
+                                        <span style="padding-right:55px; background:#fff;">N° TC</span>
+                                    </div>
+                                </div>
+                                <div class="col-5" style="margin-top:40px;">
+                                    <div class="div-hr">
+                                        <span style="padding-right:40px; background:#fff;">C.I.N°</span>
+                                    </div>
+                                    <ul class="list-inline mb4">
+                                        <li>MST <span><div class="div-card"/></span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

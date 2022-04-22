@@ -27,7 +27,6 @@
             </xpath>
 
             <xpath expr="//form/sheet/group/group[1]/field[1]" position="after">
-                <field name="travel_agency" attrs="{'invisible': [('company_type','=', 'person')]}"/>
                 <field name="vat" string="RIF" placeholder="e.g. BE0477472701" attrs="{'readonly': [('parent_id','!=',False)]}"/>
                 <field name="vat2" string="Numero de Cedula" placeholder="e.g. BE0477472701"
                        attrs="{'readonly': [('parent_id','!=',False)], 'invisible': [('company_type','=', 'company')]}"/>
@@ -35,7 +34,6 @@
 
             <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group[1]/group[2]" position="inside">
                 <field name="vat2" string="Cedula de Identidad" attrs="{'invisible': [('type','!=', 'contact')]}"/>
-                <field name="freelance" attrs="{'invisible': [('type','!=', 'contact')]}"/>
             </xpath>
 
             <xpath expr="//form/sheet/notebook/page[@name='contact_addresses']/field[@name='child_ids']/form/sheet/group[1]/group[1]/field[@name='title']" position="attributes">
@@ -55,9 +53,10 @@
                 <attribute name="invisible">1</attribute>
             </xpath>
 
-            <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="after">
-                    <field name="seller"/>
-                </xpath>
+            <xpath expr="//form/sheet/notebook/page[@name='contact_addresses']" position="attributes">
+                <attribute name="attrs">{'invisible': [('company_type','in', ('freelance', 'person'))]}</attribute>
+            </xpath>
+
         </field>
     </record>
 </odoo>
