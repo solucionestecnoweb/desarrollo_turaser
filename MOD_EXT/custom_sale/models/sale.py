@@ -17,7 +17,6 @@ class SaleOrder(models.Model):
     phone = fields.Char(related='user_id.partner_id.phone')
     user_email = fields.Char(related='user_id.partner_id.email')
 
-    pnr = fields.Char(string="PNR")
     product_location_in = fields.Char(string='localizador Interno')
     is_service = fields.Boolean(string="Extension de Servicio")
     parent_id = fields.Many2one('sale.order', string="Documento origen")
