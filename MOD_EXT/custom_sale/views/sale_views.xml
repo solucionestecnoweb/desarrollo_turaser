@@ -30,7 +30,7 @@
                 </xpath>
 
                 <xpath expr="//button[last()]" position="after">
-                    <button name="action_pre_confirm" type="object"
+                    <button name="action_pre_confirm" type="object" class="oe_highlight"
                             string="Pre-Confirmar" attrs="{'invisible': [('state', 'not in', ('draft', 'sent'))]}"/>
                     <button name="action_sale_register_payment" type="object" class="oe_highlight"
                             string="Registrar Pago" attrs="{'invisible': [('state', 'not in', ('pre_confirm'))]}"/>

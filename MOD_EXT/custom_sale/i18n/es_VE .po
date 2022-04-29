@@ -3675,7 +3675,7 @@ msgstr "Enviar un presupuesto para probar el portal del cliente."
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Send by Email"
-msgstr "Enviar por correo electrónico"
+msgstr "Enviar por correo"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_onboarding_sample_quotation_step
