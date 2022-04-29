@@ -64,7 +64,7 @@
                     <group name="order_details_partner">
                         <field name="company_type" invisible="1"/>
                         <label for="vat2" string="Numero de cedula" attrs="{'invisible': [('company_type', 'in', ('company'))]}"/>
-                        <div class="o_row" attrs="{'invisible': [('company_type', 'in', ('person'))]}">
+                        <div class="o_row" attrs="{'invisible': [('company_type', 'in', ('company'))]}">
                             <field name="vat2"/>
                             <strong><span class="p-2">R.I.F.</span></strong>
                             <field name="vat"/>
