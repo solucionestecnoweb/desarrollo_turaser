@@ -17,7 +17,7 @@
             <field name="name">Localizador Interno PNR</field>
             <field name="code">sale.order.location</field>
             <field name="implementation">standard</field>
-            <field name="suffix">LO-/</field>
+            <field name="suffix">LO-</field>
             <field name="prefix">IN-/</field>
             <field name="padding">4</field>
             <field name="active" eval="1"/>

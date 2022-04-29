@@ -18,8 +18,8 @@
                             margin: 10px 0 20px;
                         }
                         .div-card {
-                            width: 15%;
-                            padding: 12px !important;
+                            width: 25%;
+                            padding: 15px !important;
                             border: 2px solid black !important;
                             margin: 0 !important;
                         }
@@ -45,8 +45,118 @@
                                         <span style="padding-right:40px; background:#fff;">C.I.N°</span>
                                     </div>
                                     <ul class="list-inline mb4">
-                                        <li>MST <span><div class="div-card"/></span></li>
+                                        <li>
+                                            <span>
+                                                <strong>MTS</strong>
+                                                <span class="div-card"/>
+                                            </span>
+                                            <span>
+                                                <strong>VISA</strong>
+                                                <span class="div-card"/>
+                                            </span>
+                                            <span>
+                                                <strong>AA</strong>
+                                                <span class="div-card"/>
+                                            </span>
+                                        </li>
                                     </ul>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:40px;">
+                                <div class="col-6 text-left">
+                                    <ul class="list-inline mb4">
+                                        <li><p>DIRECCION (Donde llega estados de la cuenta de la tarjeta)</p></li>
+                                    </ul>
+                                </div>
+                                <div class="col-4">
+                                     <ul class="list-inline mb4">
+                                        <li>
+                                            <span>
+                                                <strong>FECHA VCTO</strong>
+                                                <span class="div-card"/>
+                                                <span class="div-card"/>
+                                                <span class="div-card"/>
+                                            </span>
+                                        </li>
+                                     </ul>
+                                </div>
+                                <div class="col-2 text-left" style="margin-top:15px;">
+                                    <div class="div-hr">
+                                        <span style="padding-right:5px; background:#fff;">COD SEG</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:20px;">
+                                <div class="col-7 text-left">
+                                     <div class="div-hr">
+                                        <span style="padding-right:5px; background:#fff;"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:20px;">
+                                <div class="col-6 text-left" style="margin-top:10px;">
+                                     <div class="div-hr">
+                                        <span style="padding-right:5px; background:#fff;"/>
+                                    </div>
+                                </div>
+                                <div class="col-2 text-center">
+                                    <span>MONTO</span>
+                                </div>
+                                <div class="col-2 text-left" style="margin-top:10px;">
+                                     <div class="div-hr">
+                                        <span style="padding-right:5px; background:#fff;"/>
+                                    </div>
+                                </div>
+                                <div class="col-2 text-left">
+                                    <span>USD</span>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:20px;">
+                                 <div class="col-9 text-left" style="margin-top:10px;">
+                                     <div class="div-hr">
+                                        <span style="padding-right:10px; background:#fff;">YO,</span>
+                                    </div>
+                                 </div>
+                                <div class="col-3 text-left">
+                                    <span>Titular de la cedula</span>
+                                 </div>
+                            </div>
+                            <div class="row" style="margin-top:10px; font-size:14px;">
+                                <div class="col-7 text-left" style="margin-top:10px;">
+                                     <div class="div-hr">
+                                        <span style="padding-right:10px; background:#fff;">Identidad Nº</span>
+                                    </div>
+                                </div>
+                                <div class="col-5 text-left">
+                                    <span>Autorizo el debito de mi tarjeta de credito</span>
+                                 </div>
+                            </div>
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-12 text-left" style="margin-top:10px;">
+                                     <ul class="list-inline mb4">
+                                         <li><strong><span>segun los datos arriba mencionados, cuyo cargo aparecera a nombre de, TURISMO OVERSEAS en ele estado de cuenta correspondiente.</span></strong></li>
+                                     </ul>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top:10px;">
+                                <div class="col-5 text-left" style="margin-top:40px;">
+                                     <div class="div-hr">
+                                        <span style="padding-right:5px; background:#fff;"/>
+                                    </div>
+                                    <span>FIRMA DE TARJETA HABIENTE</span>
+                                    <div class="div-hr">
+                                        <span style="padding-right:50px; background:#fff;">Cedula de indentidad Nº</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:20px;">
+                                <div class="col-12 text-left">
+                                    <ul class="list-inline mb4">
+                                         <li><span>PARA SER PROCESADA LA PRESENTE SOLICITUD <STRONG>SIN EXEPCION</STRONG> SE DEBERA ANEXAR</span></li>
+                                         <li><span>A) COPIA DE LA TARJETA DE CREDITO POR AMBAS CARAS</span></li>
+                                         <li><span>B) COPIA DE LA CELUDA DE IDENTIDAD DEL TARJETA HABIENTE</span></li>
+                                     </ul>
                                 </div>
                             </div>
                         </div>

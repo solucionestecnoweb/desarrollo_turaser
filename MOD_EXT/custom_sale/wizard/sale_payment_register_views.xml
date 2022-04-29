@@ -6,6 +6,9 @@
             <field name="model">sale.order.payment.register</field>
             <field name="arch" type="xml">
                 <form string="payment register">
+                    <header>
+                        <button name="print_report_voucher" string="Imprimir Autorizacion" class="oe_highlight" type="object"/>
+                    </header>
                     <sheet>
                         <group>
                             <group>
@@ -15,6 +18,7 @@
                                 <field name="bank_id"/>
                                 <field name="vat2"/>
                                 <field name="date"/>
+                                 <field name="serial"/>
                             </group>
                             <group>
                                 <field name="cardholder"/>
@@ -25,7 +29,7 @@
                                 <field name="amount"/>
                             </group>
                             <div>
-                                <field name="image_1920" nolabel="1" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image_128&quot;}"/>
+                                <field name="image" nolabel="1" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;}"/>
                             </div>
                         </group>
                         <footer>

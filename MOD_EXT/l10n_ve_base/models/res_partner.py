@@ -12,6 +12,9 @@ class Partner(models.Model):
     nationality_id = fields.Many2one('res.country', string="Nacionalidad")
     company_type = fields.Selection(selection_add=[('freelance', 'Freelance')])
     is_freelance = fields.Boolean(string='Is freelance', default=False)
+    doc_type = fields.Selection([('j', 'J')], required=True, default='j')
+    doc_type2 = fields.Selection([('v', 'V'), ('e', 'E'), ('j', 'J'), ('g', 'G'), ('p', 'P'), ('c', 'C')],
+                                required=True, default='v')
 
     @api.depends('is_company', 'is_freelance')
     def _compute_company_type(self):

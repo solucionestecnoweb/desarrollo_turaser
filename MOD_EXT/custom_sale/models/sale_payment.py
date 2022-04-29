@@ -22,9 +22,10 @@ class SaleOrderPayment(models.Model):
     account_holder = fields.Char(string='Titular de Cuenta')
     number_approval = fields.Char(string='Numero de aprobacion')
     amount = fields.Float(string='Monto')
-    image_1920 = fields.Image(string='imagen', store=True)
+    image = fields.Binary(string='imagen', store=True, attachment=True)
     state = fields.Selection([('draft', 'Borrador'), ('confirmed', 'Pago confimardo'), ('cancel', 'Cancelado')],
                              string='Status', readonly=True, copy=False, index=True, tracking=3, default='draft')
+    serial = fields.Text(string='Seriales')
 
     @api.model
     def create(self, vals):

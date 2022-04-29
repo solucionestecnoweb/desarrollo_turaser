@@ -19,7 +19,8 @@ class SaleOrderPaymentRegister(models.Model):
     account_holder = fields.Char(string='Titular de Cuenta')
     number_approval = fields.Char(string='Numero de aprobacion')
     amount = fields.Float(string='Monto')
-    image_1920 = fields.Image(string='imagen', store=True)
+    image = fields.Binary(string='imagen', store=True, attachment=True)
+    serial = fields.Text(string='Seriales')
 
     def create_payment(self):
         payment_val = {
@@ -34,7 +35,7 @@ class SaleOrderPaymentRegister(models.Model):
             'account_holder': self.account_holder,
             'number_approval': self.number_approval,
             'amount': self.amount,
-            'image_1920': self.image_1920,
+            'image': self.image,
         }
         payment = self.env['sale.order.payment'].sudo().create(payment_val)
         payment.sale_id.write({
@@ -42,3 +43,6 @@ class SaleOrderPaymentRegister(models.Model):
             'state': 'payment_pending',
         })
         return payment
+
+    def print_report_voucher(self):
+        return self.env.ref('custom_sale.action_sale_payment_voucher').report_action(self)

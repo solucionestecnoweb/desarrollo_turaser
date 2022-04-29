@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!--Account Journal -->
+	<record id="retention_iva_journal" model="account.journal">
+		<field name="name">RETENCIÓN IVA</field>
+		<field name="code">ret_iva</field>
+		<field name="type">ret_iva</field>
+		<field name="show_on_dashboard" eval="True" />
+	</record>
+</odoo>

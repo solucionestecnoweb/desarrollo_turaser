@@ -27,6 +27,20 @@
             </xpath>
 
             <xpath expr="//form/sheet/group/group[1]/field[1]" position="after">
+
+                <label for="vat" string="RIF"/>
+                <div>
+                    <field name="doc_type" placeholder="Type" attrs="{'readonly': [('parent_id','!=',False)]}" class="oe_inline"/>
+                    <span class="oe_read_only"> - </span>
+                    <field name="vat" placeholder="Number" class="oe_inline" attrs="{'readonly': [('parent_id','!=',False)]}"/>
+                </div>
+
+                <label for="vat2" string="Numero de Cedula" attrs="{'readonly': [('parent_id','!=',False)], 'invisible': [('company_type','=', 'company')]}"/>
+                <div attrs="{'invisible': [('company_type','=', 'company')]}">
+                    <field name="doc_type2" placeholder="Type" attrs="{'readonly': [('parent_id','!=',False)]}" class="oe_inline"/>
+                    <span class="oe_read_only"> - </span>
+                    <field name="vat2" placeholder="Number" class="oe_inline" attrs="{'readonly': [('parent_id','!=',False)], 'invisible': [('company_type','=', 'company')]}"/>
+                </div>
                 <field name="vat" string="RIF" placeholder="e.g. BE0477472701" attrs="{'readonly': [('parent_id','!=',False)]}"/>
                 <field name="vat2" string="Numero de Cedula" placeholder="e.g. BE0477472701"
                        attrs="{'readonly': [('parent_id','!=',False)], 'invisible': [('company_type','=', 'company')]}"/>

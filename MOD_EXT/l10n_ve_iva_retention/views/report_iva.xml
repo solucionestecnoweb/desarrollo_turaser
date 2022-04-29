@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_iva_retention">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <style>
+                    .border-left-right-top-bottom{
+                        border-bottom: 1px solid black !important;
+                        border-top: 1px solid black !important;
+                        border-right: 1px solid black !important;
+                        border-left: 1px solid black !important;
+                    }
+                </style>
+                <t t-foreach="docs" t-as="o">
+                     <div class="header">
+                         <div class="container">
+                            <div class="row">
+                                <div class="col-3 mb4">
+                                    <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 100px;" alt="Logo"/>
+                                </div>
+                                <div class="col-9">
+                                    <ul class="list-inline mb4 text-center">
+                                         <li style="font-size:18px;"><p><strong>COMPROBANTE DE RETENCIÓN DEL IMPUESTO AL VALOR AGREGADO</strong></p></li>
+                                         <li style="font-size:12px;"><p>LEY IVA – ART. 11: “SERAN RESPONSABLES DEL PAGO DE IMPUESTO EN CALIDAD DE AGENTES DE RETENCION, LOS COMPRADORES O ADQUIRIENTES DE DETERMINADOS BIENES MUEBLES Y LOS RECEPTORES DE CIERTOS SERVICIOS A QUIENES LA ADMINISTRACION TRIBUTARIA DESIGNE COMO TAL”</p></li>
+                                    </ul>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+                     <div class="page">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-10 text-left">
+                                    <ul class="list-inline mb4">
+                                        <li style="font-size:20px;">Nro Comprobante: <span t-field="o.name"/></li>
+                                        <li style="font-size:20px;">Fecha: <span t-field="o.move_date"/></li>
+                                    </ul>
+                                </div>
+                                <div class="col-2 text-left">
+                                    <ul class="list-inline mb4">
+                                        <li style="font-size:20px;"><strong>Período Fiscal:</strong>
+                                            <span t-esc="o.move_date.year"/>-<span t-esc="o.move_date.month"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="container border border-dark" style="margin-top:20px;">
+                             <div class="row">
+                                 <div class="col-5">
+                                     <ul class="list-inline mb4 text-center">
+                                         <li>
+                                             <strong>NOMBRE O RAZÓN SOCIAL</strong>
+                                             <li><span t-field="o.company_id.name"/></li>
+                                         </li>
+                                     </ul>
+                                 </div>
+                                 <div class="col-2">
+                                     <ul class="list-inline mb4 text-center">
+                                         <li>
+                                             <strong>RIF</strong>
+                                             <li><span t-field="o.company_id.doc_type"/>-<span t-field="o.company_id.vat"/></li>
+                                         </li>
+                                     </ul>
+                                 </div>
+                                 <div class="col-5" style="">
+                                     <ul class="list-inline mb4 text-center">
+                                         <li>
+                                             <strong>DIRECCIÓN FISCAL</strong>
+                                             <li><span t-field="o.company_id.street"/>,
+                                                 <span t-field="o.company_id.street2"/>,
+                                                 <span t-field="o.company_id.state_id.name"/>,
+                                                 <span t-field="o.company_id.city"/>
+                                             </li>
+                                         </li>
+                                     </ul>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="container border border-dark" style="margin-top:20px;">
+                             <div class="row">
+                                 <div class="col-5">
+                                     <ul class="list-inline mb4 text-center">
+                                         <li>
+                                             <strong>NOMBRE O RAZÓN SOCIAL</strong>
+                                             <li><span t-field="o.partner_id.name"/></li>
+                                         </li>
+                                     </ul>
+                                 </div>
+                                 <div class="col-2">
+                                     <ul class="list-inline mb4 text-center">
+                                         <li>
+                                             <strong>RIF</strong>
+                                             <li><span t-field="o.partner_id.doc_type"/>-<span t-field="o.partner_id.vat"/></li>
+                                         </li>
+                                     </ul>
+                                 </div>
+                                 <div class="col-5" style="">
+                                     <ul class="list-inline mb4 text-center">
+                                         <li>
+                                             <strong>DIRECCIÓN FISCAL</strong>
+                                             <li><span t-field="o.partner_id.street"/>,
+                                                 <span t-field="o.partner_id.street2"/>,
+                                                 <span t-field="o.partner_id.state_id.name"/>,
+                                                 <span t-field="o.partner_id.city"/>
+                                             </li>
+                                         </li>
+                                     </ul>
+                                 </div>
+                             </div>
+                         </div>
+                         <table class="table table-bordered table-sm" style="margin-top:20px;">
+                             <thead class="border-left-right-top-bottom text-center">
+                                 <tr>
+                                     <th class="border-left-right-top-bottom">Fecha Factura</th>
+                                     <th class="border-left-right-top-bottom">N° de Factura</th>
+                                     <th class="border-left-right-top-bottom">N° Control</th>
+                                     <th class="border-left-right-top-bottom">N° Nota de Débito</th>
+                                     <th class="border-left-right-top-bottom">N° Nota de Crédito</th>
+                                     <th class="border-left-right-top-bottom">Tipo Trans</th>
+                                     <th class="border-left-right-top-bottom">N° Factura Afectada</th>
+                                     <th class="border-left-right-top-bottom">Total Compras con IVA</th>
+                                     <th class="border-left-right-top-bottom">Compras Exentas</th>
+                                     <th class="border-left-right-top-bottom">Base Imponible</th>
+                                     <th class="border-left-right-top-bottom">% Alicuota</th>
+                                     <th class="border-left-right-top-bottom">Impuesto IVA</th>
+                                     <th class="border-left-right-top-bottom">% Retención</th>
+                                     <th class="border-left-right-top-bottom">IVA Retenido</th>
+                                 </tr>
+                             </thead>
+                         </table>
+                     </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

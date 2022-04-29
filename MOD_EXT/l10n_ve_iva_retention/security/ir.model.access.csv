@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_iva_retention_user,retention.iva,model_retention_iva,account.group_account_user,1,0,0,0
+access_iva_retention_invoice,retention.iva,model_retention_iva,account.group_account_invoice,1,1,1,1
+access_iva_retention_manager,retention.iva,model_retention_iva,account.group_account_manager,1,1,1,1
+access_iva_retention_line_user,retention.iva.line,model_retention_iva_line,account.group_account_user,1,0,0,0
+access_iva_retention_line_invoice,retention.iva.line,model_retention_iva_line,account.group_account_invoice,1,1,1,1
+access_iva_retention_line_manager,retention.iva.line,model_retention_iva_line,account.group_account_manager,1,1,1,1
+

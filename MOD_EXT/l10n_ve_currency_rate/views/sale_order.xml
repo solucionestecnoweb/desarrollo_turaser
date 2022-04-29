@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- sale.order inherit form view -->
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.inherit.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Add your xpath here -->
+            <xpath expr="//field[@name='currency_id']" position="before">
+                <field name="custom_rate" groups="base.group_multi_currency" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="rate" groups="base.group_multi_currency" attrs="{'readonly': [('state', '!=', 'draft'), ('custom_rate', '!=', True)]}"/>
+            </xpath>
+            <xpath expr="//tree/field[@name='price_unit']" position="after">
+                <field name="price_unit_usd"  readonly="1" optional="show"/>
+                <field name="price_total_usd" readonly="1" optional="show"/>
+            </xpath>
+            <xpath expr="//group/field[@name='tax_totals_json']" position="after">
+                <field name="usd_currency_id" invisible="1"/>
+                <field name="amount_total_usd" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'usd_currency_id'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
