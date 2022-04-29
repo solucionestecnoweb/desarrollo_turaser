@@ -18,6 +18,7 @@
 
                 <xpath expr="//button[@name='action_quotation_send'][1]" position="attributes">
                     <attribute name="attrs">{}</attribute>
+                    <attribute name="string">ENVIAR POR CORREO</attribute>
                     <attribute name="attrs">{'invisible': [
                         ('state', 'in', ('draft', 'payment_pending', 'service_for_approved', 'sale', 'service_issue_voucher', 'voucher_issue', 'pre_invoice', 'invoice', 'done', 'cancel'))]}</attribute>
                 </xpath>
@@ -31,7 +32,7 @@
                 <xpath expr="//button[last()]" position="after">
                     <button name="action_pre_confirm" type="object"
                             string="Pre-Confirmar" attrs="{'invisible': [('state', 'not in', ('draft', 'sent'))]}"/>
-                    <button name="action_sale_register_payment" type="object" class="btn-primary"
+                    <button name="action_sale_register_payment" type="object" class="oe_highlight"
                             string="Registrar Pago" attrs="{'invisible': [('state', 'not in', ('pre_confirm'))]}"/>
 
 <!--                    <button name="action_payment_for_approval" type="object" class="btn-primary"-->
