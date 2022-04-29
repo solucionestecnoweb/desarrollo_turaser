@@ -28,8 +28,8 @@
 
             <xpath expr="//form/sheet/group/group[1]/field[1]" position="after">
 
-                <label for="vat" string="RIF" attrs="{['invisible': [('company_type','=', 'person')]}"/>
-                <div attrs="{['invisible': [('company_type','=', 'person')]}">
+                <label for="vat" string="RIF" attrs="{'invisible': [('company_type','=', 'person')]}"/>
+                <div attrs="{'invisible': [('company_type','=', 'person')]}">
                     <field name="doc_type" placeholder="Type" attrs="{'readonly': [('parent_id','!=',False)]}" class="oe_inline"/>
                     <span class="oe_read_only"> - </span>
                     <field name="vat" placeholder="Number" class="oe_inline" attrs="{'readonly': [('parent_id','!=',False)]}"/>
