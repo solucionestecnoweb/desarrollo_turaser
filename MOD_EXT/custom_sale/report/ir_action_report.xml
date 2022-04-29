@@ -14,7 +14,7 @@
              <field name="paperformat_id" ref="custom_sale.paperformat_sale_voucher_payment"/>
         </record>
 
-        <record id="action_sale_voucher" model="ir.actions.report">
+        <!--record id="action_sale_voucher" model="ir.actions.report">
             <field name="name">Voucher</field>
             <field name="model">sale.order</field>
             <field name="report_type">qweb-pdf</field>
@@ -25,6 +25,6 @@
 
         <record id="action_sale_voucher" model="ir.actions.report">
              <field name="paperformat_id" ref="custom_sale.paperformat_sale_voucher"/>
-        </record>
+        </record-->
     </data>
 </odoo>
