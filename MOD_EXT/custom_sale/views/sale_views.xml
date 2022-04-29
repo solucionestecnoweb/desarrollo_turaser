@@ -66,7 +66,7 @@
                         <label for="vat2" string="Numero de cedula" attrs="{'invisible': [('company_type', 'in', ('company'))]}"/>
                         <div class="o_row" attrs="{'invisible': [('company_type', 'in', ('company'))]}">
                             <field name="vat2"/>
-                            <strong><span class="p-2">R.I.F.</span></strong>
+                            <strong><span>R.I.F.</span></strong>
                             <field name="vat"/>
                         </div>
                         <field name="vat" string="RIF" attrs="{'invisible': [('company_type', 'in', ('person'))]}"/>
