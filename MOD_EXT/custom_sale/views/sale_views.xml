@@ -78,7 +78,6 @@
                             <strong><span>Nro. de Promocion</span></strong>
                             <field class="oe_inline" name="number_promotion"/>
                         </div>
-                        <field name="pnr" style="width: 70%%"/>
                          <field name="product_location_in" readonly="1"/>
                     </group>
 
