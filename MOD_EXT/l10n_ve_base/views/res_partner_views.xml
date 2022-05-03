@@ -23,13 +23,14 @@
 
             <xpath expr="//form/sheet/group/group[1]/div[1]" position="after">
                 <field name="category_id" string="Etiquetas" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Tags..."/>
+                <field name="people_type"/>
                 <field name="birth_date" attrs="{'invisible': [('company_type','=', 'person')]}"/>
             </xpath>
 
             <xpath expr="//form/sheet/group/group[1]/field[1]" position="after">
 
-                <label for="vat" string="RIF" attrs="{'invisible': [('company_type','=', 'person')]}"/>
-                <div attrs="{'invisible': [('company_type','=', 'person')]}">
+                <label for="vat" string="RIF"/>
+                <div>
                     <field name="doc_type" placeholder="Type" attrs="{'readonly': [('parent_id','!=',False)]}" class="oe_inline"/>
                     <span class="oe_read_only"> - </span>
                     <field name="vat" placeholder="Number" class="oe_inline" attrs="{'readonly': [('parent_id','!=',False)]}"/>
@@ -41,6 +42,9 @@
                     <span class="oe_read_only"> - </span>
                     <field name="vat2" placeholder="Number" class="oe_inline" attrs="{'readonly': [('parent_id','!=',False)], 'invisible': [('company_type','=', 'company')]}"/>
                 </div>
+                <field name="vat" string="RIF" placeholder="e.g. BE0477472701" attrs="{'readonly': [('parent_id','!=',False)]}"/>
+                <field name="vat2" string="Numero de Cedula" placeholder="e.g. BE0477472701"
+                       attrs="{'readonly': [('parent_id','!=',False)], 'invisible': [('company_type','=', 'company')]}"/>
             </xpath>
 
             <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group[1]/group[2]" position="inside">

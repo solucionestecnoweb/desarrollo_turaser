@@ -15,6 +15,13 @@ class Partner(models.Model):
     doc_type = fields.Selection([('j', 'J')], required=True, default='j')
     doc_type2 = fields.Selection([('v', 'V'), ('e', 'E'), ('j', 'J'), ('g', 'G'), ('p', 'P'), ('c', 'C')],
                                 required=True, default='v')
+    people_type = fields.Selection([
+        ('na', 'N/A'),
+        ('resident_nat_people', 'PNRE Residente Natural Person'),
+        ('non_resit_nat_people', 'PNNR Non-resident Natural Person'),
+        ('domi_ledal_entity', 'PJDO Domiciled Legal Entity'),
+        ('legal_ent_not_domicilied', 'PJDO Legal Entity Not Domiciled')],
+        string='People type', required="True", default='na')
 
     @api.depends('is_company', 'is_freelance')
     def _compute_company_type(self):
