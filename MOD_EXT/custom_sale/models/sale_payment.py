@@ -23,7 +23,7 @@ class SaleOrderPayment(models.Model):
     number_approval = fields.Char(string='Numero de aprobacion')
     amount = fields.Float(string='Monto')
     image = fields.Binary(string='imagen', store=True, attachment=True)
-    state = fields.Selection([('draft', 'Borrador'), ('confirmed', 'Pago confimardo'), ('cancel', 'Cancelado')],
+    state = fields.Selection([('draft', 'Borrador'), ('confirmed', 'Pago confimardo')],
                              string='Status', readonly=True, copy=False, index=True, tracking=3, default='draft')
     serial = fields.Text(string='Seriales')
 
@@ -40,10 +40,7 @@ class SaleOrderPayment(models.Model):
 
     def action_payment_for_approval(self):
         self.write({'state': 'confirmed'})
-        self.sale_id.write({'state': 'service_for_approved'})
-
-    def action_cancel(self):
-        self.write({'state': 'cancel'})
+        self.sale_id.write({'state': 'service_approved'})
 
 
 class SaleOrderPaymentMethod(models.Model):

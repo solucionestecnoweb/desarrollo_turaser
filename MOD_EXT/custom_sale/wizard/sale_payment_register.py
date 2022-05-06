@@ -40,9 +40,10 @@ class SaleOrderPaymentRegister(models.Model):
         payment = self.env['sale.order.payment'].sudo().create(payment_val)
         payment.sale_id.write({
             'sale_payment_id': payment.id,
-            'state': 'payment_pending',
+            'state': 'service_for_approved',
         })
         return payment
 
     def print_report_voucher(self):
-        return self.env.ref('custom_sale.action_sale_payment_voucher').report_action(self)
+         return self.env.ref('custom_sale.action_sale_payment_voucher').report_action(self)
+

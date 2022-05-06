@@ -3441,7 +3441,7 @@ msgstr "Pedido de venta realizado"
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 #, python-format
 msgid "Sales Order"
-msgstr "Servicio Aprobado"
+msgstr "Servicio Pendiente de pago"
 
 #. module: sale
 #: model:ir.model,name:sale.model_sale_order_cancel
@@ -3675,7 +3675,7 @@ msgstr "Enviar un presupuesto para probar el portal del cliente."
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Send by Email"
-msgstr "Enviar por correo"
+msgstr "Enviar por correo electrónico"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_onboarding_sample_quotation_step

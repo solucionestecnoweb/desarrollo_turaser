@@ -6,9 +6,9 @@
             <field name="model">sale.order.payment.register</field>
             <field name="arch" type="xml">
                 <form string="payment register">
-                    <header>
-                        <button name="print_report_voucher" string="Imprimir Autorizacion" class="oe_highlight" type="object"/>
-                    </header>
+<!--                    <header>-->
+<!--                        <button name="print_report_voucher" string="Imprimir Autorizacion" class="oe_highlight" type="object"/>-->
+<!--                    </header>-->
                     <sheet>
                         <group>
                             <group>

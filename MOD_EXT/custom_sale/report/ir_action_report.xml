@@ -14,17 +14,17 @@
              <field name="paperformat_id" ref="custom_sale.paperformat_sale_voucher_payment"/>
         </record>
 
-        <!--record id="action_sale_voucher" model="ir.actions.report">
+        <record id="action_sale_voucher" model="ir.actions.report">
             <field name="name">Voucher</field>
             <field name="model">sale.order</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">custom_sale.report_sale_order_voucher</field>
-            <field name="report_file">custom_sale.report_sale_order_voucher</field>
+            <field name="report_name">custom_sale.report_voucher</field>
+            <field name="report_file">custom_sale.report_voucher</field>
             <field name="binding_type">report</field>
         </record>
 
         <record id="action_sale_voucher" model="ir.actions.report">
-             <field name="paperformat_id" ref="custom_sale.paperformat_sale_voucher"/>
-        </record-->
+             <field name="paperformat_id" ref="custom_sale.paperformat_voucher"/>
+        </record>
     </data>
 </odoo>

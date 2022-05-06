@@ -134,21 +134,21 @@
                                             <t t-set="a" t-value="0.0"/>
                                             <t t-foreach="line.tax_ids" t-as="tax">
                                                 <t t-if="tax.aliquot == 'general'">
-                                                 <t t-set="t" t-value="t + (line.price_total - line.price_subtotal)"/>
-                                                <t t-set="acum_alicuota_general" t-value="acum_alicuota_general + (line.price_total - line.price_subtotal)"/>
-                                            </t>
-                                            <t t-if="tax.aliquot == 'reduced'">
-                                                 <t t-set="r" t-value="r + (line.price_total - line.price_subtotal)"/>
-                                                <t t-set="acum_alicuota_reducida" t-value="acum_alicuota_reducida + (line.price_total - line.price_subtotal)"/>
-                                            </t>
-                                            <t t-if="tax.aliquot == 'additional'">
-                                                 <t t-set="a" t-value="a + (line.price_total - line.price_subtotal)"/>
-                                                <t t-set="acum_alicuota_adicional" t-value="acum_alicuota_adicional + (line.price_total - line.price_subtotal)"/>
-                                            </t>
-                                            <t t-if="tax.aliquot == 'exempt'">
-                                                <t t-set="acum_excento" t-value="acum_alicuota_adicional + (line.price_total)"/>
-                                                <t t-set="e" t-value="e + (line.price_total)"/>
-                                            </t>
+                                                    <t t-set="t" t-value="t + (line.price_total - line.price_subtotal)"/>
+                                                    <t t-set="acum_alicuota_general" t-value="acum_alicuota_general + (line.price_total - line.price_subtotal)"/>
+                                                </t>
+                                                <t t-if="tax.aliquot == 'reduced'">
+                                                    <t t-set="r" t-value="r + (line.price_total - line.price_subtotal)"/>
+                                                    <t t-set="acum_alicuota_reducida" t-value="acum_alicuota_reducida + (line.price_total - line.price_subtotal)"/>
+                                                </t>
+                                                <t t-if="tax.aliquot == 'additional'">
+                                                    <t t-set="a" t-value="a + (line.price_total - line.price_subtotal)"/>
+                                                    <t t-set="acum_alicuota_adicional" t-value="acum_alicuota_adicional + (line.price_total - line.price_subtotal)"/>
+                                                </t>
+                                                <t t-if="tax.aliquot == 'exempt'">
+                                                    <t t-set="acum_excento" t-value="acum_alicuota_adicional + (line.price_total)"/>
+                                                    <t t-set="e" t-value="e + (line.price_total)"/>
+                                                </t>
                                             </t>
                                             <tr class="text-center">
                                                 <td class="border-left-right-top-bottom" t-esc="line.product_id.name"/>

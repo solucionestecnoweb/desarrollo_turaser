@@ -9,8 +9,6 @@
                     <header>
                         <button name="action_payment_for_approval"
                                 string="Confirmar Pago" class="oe_highlight" type="object"  attrs="{'invisible': [('state', '=', 'confirmed')]}"/>
-                        <button name="action_cancel" string="Cancelar" class="oe_highlight" type="object"
-                                attrs="{'invisible': [('state', '=', 'cancel')]}"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>

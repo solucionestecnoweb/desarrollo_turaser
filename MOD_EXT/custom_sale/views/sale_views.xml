@@ -6,68 +6,107 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+            <!--Campos Invisbles-->
+                <xpath expr="//button[@name='action_confirm'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
 
-                <xpath expr="//button[@name='action_confirm'][2]" position="replace"/>
-                <xpath expr="//button[@name='action_quotation_send'][2]" position="replace"/>
-                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="replace"/>
+                <xpath expr="//button[@name='action_quotation_send'][2]" position="attributes">
+                 <attribute name="invisible">1</attribute>
+                </xpath>
 
+                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//form/header/field[@name='state']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                    <!--<field name="state" widget="statusbar"/>-->
+                </xpath>
+
+                <xpath expr="//field[@name='payment_term_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            <!--            -->
+
+            <!--  Membretes  -->
+                <xpath expr="//div[hasclass('oe_button_box')]" position="after">
+                    <widget name="web_ribbon" title="Cotización de Servicio" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <widget name="web_ribbon" title="Cotización de Servicio Enviada" attrs="{'invisible': [('state', '!=', 'send')]}"/>
+                    <widget name="web_ribbon" title="Cotización de Servicio Pre-Confirmada" attrs="{'invisible': [('state', '!=', 'pre_confirm')]}"/>
+                    <widget name="web_ribbon" title="Servicio Pendiente de Pago" attrs="{'invisible': [('state', '!=', 'sale')]}"/>
+                    <widget name="web_ribbon" title="Servicio por Aprobar" attrs="{'invisible': [('state', '!=', 'service_for_approved')]}"/>
+                    <widget name="web_ribbon" title="Servicio Aprobado" attrs="{'invisible': [('state', '!=', 'service_approved')]}"/>
+                    <widget name="web_ribbon" title="Liberar Voucher" attrs="{'invisible': [('state', '!=', 'service_issue_voucher')]}"/>
+                    <widget name="web_ribbon" title="Voucher Emitido" attrs="{'invisible': [('state', '!=', 'voucher_issue')]}"/>
+                    <widget name="web_ribbon" title="Voucher enviado por correo electronico o whatsapp" attrs="{'invisible': [('state', '!=', 'voucher_issue_send')]}"/>
+                    <widget name="web_ribbon" title="Pre-factura" attrs="{'invisible': [('state', '!=', 'pre_invoice')]}"/>
+                    <widget name="web_ribbon" title="Factura creada" attrs="{'invisible': [('state', '!=', 'invoice')]}"/>
+                    <widget name="web_ribbon" title="Servicio Bloqueado" bg_color="bg-info" attrs="{'invisible': [('state', '!=', 'done')]}"/>
+                    <widget name="web_ribbon" title="Servicio Cancelado" bg_color="bg-danger" attrs="{'invisible': [('state', '!=', 'cancel')]}"/>
+                </xpath>
+            <!--             -->
+
+            <!--  Botones  -->
                 <xpath expr="//button[@name='action_confirm'][1]" position="attributes">
                     <attribute name="attrs">{}</attribute>
-                    <attribute name="attrs">{'invisible': [('state', 'not in', ('service_for_approved'))]}</attribute>
+                    <attribute name="attrs">{'invisible': [('state', '!=', 'pre_confirm')]}</attribute>
                 </xpath>
 
                 <xpath expr="//button[@name='action_quotation_send'][1]" position="attributes">
                     <attribute name="attrs">{}</attribute>
-                    <attribute name="string">ENVIAR POR CORREO</attribute>
-                    <attribute name="attrs">{'invisible': [
-                        ('state', 'in', ('draft', 'payment_pending', 'service_for_approved', 'sale', 'service_issue_voucher', 'voucher_issue', 'pre_invoice', 'invoice', 'done', 'cancel'))]}</attribute>
+                    <attribute name="attrs">{'invisible': [('state', 'not in', ('draft', 'pre_confirm'))]}</attribute>
                 </xpath>
 
-                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][1]" position="attributes">
-                     <attribute name="invisible">1</attribute>
-<!--                    <attribute name="attrs">{}</attribute>-->
-<!--                    <attribute name="attrs">{'invisible': [('state', 'not in', ('pre_invoice'))]}</attribute>-->
+                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="attributes">
+                    <attribute name="attrs">{}</attribute>
+                    <attribute name="attrs">{'invisible': [('state', '!=', 'pre_invoice')]}</attribute>
                 </xpath>
 
                 <xpath expr="//button[last()]" position="after">
                     <button name="action_pre_confirm" type="object" class="oe_highlight"
                             string="Pre-Confirmar" attrs="{'invisible': [('state', 'not in', ('draft', 'sent'))]}"/>
+
                     <button name="action_sale_register_payment" type="object" class="oe_highlight"
-                            string="Registrar Pago" attrs="{'invisible': [('state', 'not in', ('pre_confirm'))]}"/>
+                            string="Registrar Pago" attrs="{'invisible': [('state', '!=', 'sale')]}"/>
 
-<!--                    <button name="action_payment_for_approval" type="object" class="btn-primary"-->
-<!--                            string="Confirmar Pago" attrs="{'invisible': [('state', 'not in', ('payment_pending'))]}"/>-->
+                    <button name="action_sale_payment" type="object" class="oe_highlight"
+                            string="Generar soporte de pago" attrs="{'invisible': [('state', '!=', 'service_for_approved')]}"/>
 
-                    <button name="action_voucher_issue" type="object" class="btn-primary" string="Liberar Voucher"
-                            attrs="{'invisible': [('state', 'not in', ('sale'))]}"/>
+                    <button name="action_voucher_issue" type="object" class="oe_highlight" string="Liberar Voucher"
+                            attrs="{'invisible': [('state', '!=', 'service_approved')]}"/>
 
-                    <button name="action_validate_voucher" type="object" class="btn-primary" string="Emitir Voucher"
-                            attrs="{'invisible': [('state', 'not in', ('service_issue_voucher', 'pre_invoice'))]}"/>
+                    <button name="action_validate_voucher" type="object" class="oe_highlight" string="Emitir Voucher"
+                            attrs="{'invisible': [('state', '!=', 'service_issue_voucher')]}"/>
 
-<!--                    <button name="action_validate_pre_invoice" type="object" class="btn-primary" string="Pre-Factura"-->
-<!--                            attrs="{'invisible': [('state', 'not in', ('voucher_issue'))]}"/>-->
+                    <button name="action_validate_pre_factura" type="object" class="oe_highlight" string="Pre-factura"
+                            attrs="{'invisible': [('state', '!=', 'voucher_issue_send')]}"/>
+
                 </xpath>
+            <!--             -->
 
-                <xpath expr="//form/header/field[@name='state']" position="replace">
-                    <field name="state" widget="statusbar"/>
-                </xpath>
-
-                <xpath expr="//div[hasclass('oe_button_box')]" position="after">
-                     <widget name="web_ribbon" title="Servicio Aprobado"
-                             attrs="{'invisible': [('state', 'in', ('draft', 'pre_confirm', 'sent', 'payment_pending', 'service_for_approved', 'service_issue_voucher', 'voucher_issue', 'pre_invoice', 'invoice', 'done', 'cancel'))]}"/>
-                </xpath>
-
-                <xpath expr="//field[@name='payment_term_id']" position="attributes">
-                    <attribute name="invisible">1</attribute>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <label for="sale_payment_id" string="Metodo de Pago" class="d-flex"/>
+                    <div>
+                     <field name="sale_payment_id" readonly="1"/>
+                        <span class="oe_inline o_form_label mx-3 oe_read_only"
+                              attrs="{'invisible': [('state', 'not in', ('service_for_approved'))]}">Pago Pendiente</span>
+                        <span class="oe_inline o_form_label mr-3 ml-2 oe_edit_only"
+                              attrs="{'invisible': [('state', 'not in', ('service_for_approved'))]}">Pago Pendiente</span>
+                        <span class="oe_inline o_form_label mr-3 ml-2 oe_edit_only"
+                              attrs="{'invisible': [('state', '!=', 'service_approved')]}">Pagado</span>
+                        <span class="oe_inline o_form_label mr-3 ml-2 oe_edit_only"
+                              attrs="{'invisible': [('state', '!=', 'service_approved')]}">Pagado</span>
+                    </div>
                 </xpath>
 
                 <xpath expr="//group[@name='order_details']" position="after">
                     <group name="order_details_partner">
                         <field name="company_type" invisible="1"/>
                         <label for="vat2" string="Numero de cedula" attrs="{'invisible': [('company_type', 'in', ('company'))]}"/>
-                        <div class="o_row" attrs="{'invisible': [('company_type', 'in', ('company'))]}">
+                        <div class="o_row" attrs="{'invisible': [('company_type', 'in', ('person'))]}">
                             <field name="vat2"/>
-                            <strong><span>R.I.F.</span></strong>
+                            <strong><span class="p-2">R.I.F.</span></strong>
                             <field name="vat"/>
                         </div>
                         <field name="vat" string="RIF" attrs="{'invisible': [('company_type', 'in', ('person'))]}"/>
@@ -78,6 +117,7 @@
                             <strong><span>Nro. de Promocion</span></strong>
                             <field class="oe_inline" name="number_promotion"/>
                         </div>
+                        <field name="pnr" style="width: 70%%"/>
                          <field name="product_location_in" readonly="1"/>
                     </group>
 
@@ -96,16 +136,6 @@
                     </group>
                 </xpath>
 
-                <xpath expr="//field[@name='payment_term_id']" position="after">
-                    <label for="sale_payment_id" string="Metodo de Pago" class="d-flex"/>
-                    <div>
-                     <field name="sale_payment_id" readonly="1"/>
-                        <span class="oe_inline o_form_label mx-3 oe_read_only"
-                              attrs="{'invisible': [('state', 'not in', ('payment_pending'))]}">Pago Pendiente</span>
-                        <span class="oe_inline o_form_label mr-3 ml-2 oe_edit_only"
-                              attrs="{'invisible': [('state', 'not in', ('payment_pending'))]}">Pago Pendiente</span>
-                    </div>
-                </xpath>
             </field>
         </record>
     </data>
