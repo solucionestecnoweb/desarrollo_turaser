@@ -16,7 +16,9 @@
                 </xpath>
 
                 <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="attributes">
-	            <attribute name="attrs">{}</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][1]" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
 
@@ -59,11 +61,6 @@
                     <attribute name="attrs">{'invisible': [('state', 'not in', ('draft', 'pre_confirm'))]}</attribute>
                 </xpath>
 
-                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="attributes">
-                    <attribute name="attrs">{}</attribute>
-                    <attribute name="attrs">{'invisible': [('state', '!=', 'pre_invoice')]}</attribute>
-                </xpath>
-
                 <xpath expr="//button[last()]" position="after">
                     <button name="action_pre_confirm" type="object" class="oe_highlight"
                             string="Pre-Confirmar" attrs="{'invisible': [('state', 'not in', ('draft', 'sent'))]}"/>
@@ -82,6 +79,10 @@
 
                     <button name="action_validate_pre_factura" type="object" class="oe_highlight" string="Pre-factura"
                             attrs="{'invisible': [('state', '!=', 'voucher_issue_send')]}"/>
+                            
+                    <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
+                        type="action" class="btn-primary"
+                        attrs="{'invisible': [('state', '!=', 'pre_invoice')]}"/>
 
                 </xpath>
             <!--             -->
