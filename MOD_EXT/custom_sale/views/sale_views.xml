@@ -16,6 +16,7 @@
                 </xpath>
 
                 <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="attributes">
+	            <attribute name="attrs">{}</attribute>
                     <attribute name="invisible">1</attribute>
                 </xpath>
 
