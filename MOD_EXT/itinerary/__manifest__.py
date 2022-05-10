@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': 'Documentos Agentes',
+    'name': 'Intinerarios de Vuelo',
     'version': '0.1',
     'category': 'Extras Tools',
     'summary': '',
@@ -9,14 +9,12 @@
     'author': "INM & LDR Soluciones Tecnológicas y Empresariales C.A",
     'website': "http://www.yourcompany.com",
     'contribuitors': "Bryan Gómez <bryan.gomez1311@gmail.com>",
-    'depends': ['base', 'sale'],
+    'depends': ['sale', 'sale_service_product'],
     'data': [
         'security/ir.model.access.csv',
-        'views/type_pax_views.xml',
-        'views/type_baggage_views.xml',
-        'views/promotion_views.xml',
-        'views/res_partner_views.xml',
-        'views/menu_root.xml',
+        'views/itinerary_views.xml',
+        'views/sale_views.xml',
+        'views/menu_itinerary.xml',
     ],
     'license': 'AGPL-3',
     'installable': True,

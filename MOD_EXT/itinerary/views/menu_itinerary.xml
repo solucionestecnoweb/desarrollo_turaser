@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+            id="menu_itinerary"
+            name="Itinerario de vuelo"
+            parent="sale.menu_sale_config"
+            sequence="30"
+
+    />
+
+    <menuitem
+            id="menu_itinerary_origin"
+            parent="menu_itinerary"
+            action="action_itinerary_origin"
+            sequence="1"
+    />
+
+    <menuitem
+            id="menu_itinerary_destination"
+            parent="menu_itinerary"
+            action="action_itinerary_destination"
+            sequence="1"
+    />
+</odoo>

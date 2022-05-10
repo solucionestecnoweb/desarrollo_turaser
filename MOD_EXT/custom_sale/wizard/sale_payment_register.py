@@ -19,6 +19,7 @@ class SaleOrderPaymentRegister(models.Model):
     account_holder = fields.Char(string='Titular de Cuenta')
     number_approval = fields.Char(string='Numero de aprobacion')
     amount = fields.Float(string='Monto')
+    file_name = fields.Char('Filename')
     image = fields.Binary(string='imagen', store=True, attachment=True)
     serial = fields.Text(string='Seriales')
 

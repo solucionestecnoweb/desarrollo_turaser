@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+itinerary_origin,itinerary.origin,model_itinerary_origin,,1,1,1,1
+itinerary_destination,itinerary.destination,model_itinerary_destination,,1,1,1,1

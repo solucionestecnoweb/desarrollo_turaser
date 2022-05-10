@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_itinerary_origin_tree" model="ir.ui.view">
+            <field name="name">itinerary.origin.tree</field>
+            <field name="model">itinerary.origin</field>
+            <field name="arch" type="xml">
+                <tree string="Origen" sample="1">
+                    <field name="code" decoration-bf="1"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_itinerary_origin" model="ir.actions.act_window">
+            <field name="name">Origen</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">itinerary.origin</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+
+        <record id="views_itinerary_destination" model="ir.ui.view">
+            <field name="name">itinerary.destination.tree</field>
+            <field name="model">itinerary.destination</field>
+            <field name="arch" type="xml">
+                <tree string="Destino" sample="1">
+                    <field name="code" decoration-bf="1"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_itinerary_destination" model="ir.actions.act_window">
+            <field name="name">Destino</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">itinerary.destination</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+    </data>
+</odoo>

@@ -21,6 +21,8 @@
                                 <field name="vat2"/>
                                 <field name="date"/>
                                 <field name="serial"/>
+                                <field name="file_name" invisible="1"/>
+                                <field name="image" filename="file_name" string="Archivo"/>
                             </group>
                             <group>
                                 <field name="cardholder"/>
@@ -30,9 +32,6 @@
                                 <field name="number_approval"/>
                                 <field name="amount"/>
                             </group>
-                            <div>
-                                <field name="image" nolabel="1" widget="image" class="oe_avatar" options="{&quot;preview_image&quot;: &quot;image&quot;}"/>
-                            </div>
                         </group>
                     </sheet>
                 </form>

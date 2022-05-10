@@ -37,14 +37,12 @@
                 </xpath>
 
                 <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/form/group/group[1]/field[@name='product_id']" position="after">
-                    <field name="seller_ids" attrs="{'invisible': [('type_service', 'in', ('tickets', 'excursion', 'Transfer'))]}" widget="many2many_tags"/>
+                    <field name="seller_id" domain="[('product_tmpl_id', '=', product_tmpl_id)]"
+                           attrs="{'invisible': [('type_service', 'in', ('tickets', 'excursion', 'Transfer'))]}"/>
                     <field name="product_location"  attrs="{'invisible': [('type_service', 'in', ('tickets'))]}"/>
                     <field name="state_id" string="Ubicacion" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
                     <field name="product_code_id" string="Codigo" attrs="{'invisible': [('type_service', 'not in', ('tickets'))]}"/>
                     <field name="product_event_id" string="Evento" attrs="{'invisible': [('type_service', 'not in', ('tickets'))]}"/>
-                    <field name="city_id2" attrs="{'invisible': [('type_service', 'not in', ('hotel', 'excursion'))]}"/>
-                    <field name="city_id" attrs="{'invisible': [('type_service', 'not in', ('ticket', 'Transfer'))]}"/>
-                    <field name="city_id2" attrs="{'invisible': [('type_service', 'not in', ('ticket', 'Transfer'))]}"/>
                     <field name="product_plan_id" attrs="{'invisible': [('type_service', 'in', ('tickets', 'excursion', 'Transfer', 'ticket', 'hotel'))]}"/>
                     <field name="drive_id" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
                     <field name="product_age" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
@@ -68,10 +66,10 @@
                         <field name="end_date" string="Fecha de Entrega" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
                         <field name="start_date" string="Fecha" attrs="{'invisible': [('type_service', 'not in', ('excursion'))]}"/>
                         <field name="product_cabin_id" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
-                        <field name="product_itinerary" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
                         <field name="product_gds" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
                         <field name="pax_id" widget="radio" attrs="{'invisible': [('type_service', 'in', ('car', 'excursion', 'Transfer'))]}"/>
                         <field name="type_service" invisible="1"/>
+                        <field name="product_tmpl_id" invisible="1"/>
                     </group>
                 </xpath>
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_passenger_form" model="ir.ui.view">
+        <field name="name">sale.order.passenger.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/form/notebook/page[@name='itinerary']/group[1]/group[1]/field[@name='destination']" position="after">
+                <field name="passenger_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -7,13 +7,12 @@
                     <t t-foreach="docs" t-as="o">
                         <div class="page">
                             <t t-foreach="o.order_line" t-as="line">
-                                <div class="header">
+                                <div>
                                     <div class="row">
                                         <div class="col-6 mb4">
                                             <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 100px;" alt="Logo"/>
                                         </div>
-                                        <div class="col-6 mb4 text-right">
-    <!--                                        <span class="text-secondary" t-esc="' '.join(map(lambda x: (x.product_id.name), o.order_line))"/>-->
+                                        <div class="col-4 mb4 text-right">
                                                 <span class="text-secondary" t-esc="line.product_id.name"/>
                                         </div>
                                     </div>
@@ -30,9 +29,32 @@
                                             </p>
                                         </div>
                                     </div>
+                                    <div class="row" style="margin-top: 25px;">
+                                         <div class="col-9 mb4">
+                                             <ul class="list-inline mb4">
+                                                 <li><strong>Dirección: </strong></li>
+                                                 <li><strong>Telefonos: </strong></li>
+                                             </ul>
+                                         </div>
+
+                                        <div class="col-3 mb4 bg-warning">
+                                            <ul class="list-inline mb4">
+                                                <li><strong>PNR: </strong></li>
+                                                <li><strong>Conf: </strong></li>
+                                            </ul>
+                                         </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 15px;">
+                                        <div class="col-8 mb4"/>
+                                         <div class="col-4 mb4 text-left">
+                                             <ul class="list-inline mb4">
+                                                 <li><strong>Check In: </strong></li>
+                                                 <li><strong>Check Out: </strong></li>
+                                             </ul>
+                                         </div>
+                                    </div>
                                 </div>
-                                <p>adhsdajhsgdhafsdhgashdgfashdfahsgfdhagsfdghafshjgahjsgd</p>
-                                <p style="page-break-after:always"/>
+                                <p style="page-break-after: always;"/>
                             </t>
                         </div>
                     </t>
