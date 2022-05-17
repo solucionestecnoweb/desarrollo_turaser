@@ -27,6 +27,20 @@
                 <xpath expr="//field[@name='payment_term_id']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+                <xpath expr="//button[@name='action_confirm'][1]" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                       <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_quotation_send'][1]" position="attributes">
+                       <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][1]" position="attributes">
+                      <attribute name="invisible">1</attribute>
+                </xpath>
             <!--            -->
 
             <!--  Membretes  -->
@@ -37,7 +51,7 @@
                     <widget name="web_ribbon" title="Servicio Pendiente de Pago" attrs="{'invisible': [('state', '!=', 'sale')]}"/>
                     <widget name="web_ribbon" title="Servicio por Aprobar" attrs="{'invisible': [('state', '!=', 'service_for_approved')]}"/>
                     <widget name="web_ribbon" title="Servicio Aprobado" attrs="{'invisible': [('state', '!=', 'service_approved')]}"/>
-                    <widget name="web_ribbon" title="Liberar Voucher" attrs="{'invisible': [('state', '!=', 'service_issue_voucher')]}"/>
+                    <widget name="web_ribbon" title="Voucher Liberado" attrs="{'invisible': [('state', '!=', 'service_issue_voucher')]}"/>
                     <widget name="web_ribbon" title="Voucher Emitido" attrs="{'invisible': [('state', '!=', 'voucher_issue')]}"/>
                     <widget name="web_ribbon" title="Voucher enviado por correo electronico o whatsapp" attrs="{'invisible': [('state', '!=', 'voucher_issue_send')]}"/>
                     <widget name="web_ribbon" title="Pre-factura" attrs="{'invisible': [('state', '!=', 'pre_invoice')]}"/>
@@ -48,31 +62,13 @@
             <!--             -->
 
             <!--  Botones  -->
-                <xpath expr="//button[@name='action_confirm'][1]" position="attributes">
-                    <attribute name="attrs">{}</attribute>
-                    <attribute name="attrs">{'invisible': [('state', '!=', 'pre_confirm')]}</attribute>
-                </xpath>
-                <xpath expr="//button[@name='action_cancel']" position="attributes">
-                    <attribute name="attrs">{}</attribute>
-                    <attribute name="attrs">{'invisible': [('state', 'in', ('draft', 'pre_confirm'))]}</attribute>
-                </xpath>
-
-                <xpath expr="//button[@name='action_quotation_send'][1]" position="attributes">
-                    <attribute name="attrs">{}</attribute>
-                    <attribute name="attrs">{'invisible': [('state', 'not in', ('draft', 'pre_confirm'))]}</attribute>
-                </xpath>
-
-                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="attributes">
-                    <attribute name="attrs">{}</attribute>
-                    <attribute name="attrs">{'invisible': [('state', '!=', 'pre_invoice')]}</attribute>
-                </xpath>
 
                 <xpath expr="//button[last()]" position="after">
                     <button name="action_pre_confirm" type="object" class="oe_highlight"
                             string="Pre-Confirmar" attrs="{'invisible': [('state', 'not in', ('draft', 'sent'))]}"/>
 
                     <button name="action_sale_register_payment" type="object" class="oe_highlight"
-                            string="Registrar Pago" attrs="{'invisible': [('state', '!=', 'sale')]}"/>
+                            string="Registrar Soporte de Pago" attrs="{'invisible': [('state', '!=', 'sale')]}"/>
 
                     <button name="action_sale_payment" type="object" class="oe_highlight"
                             string="Generar soporte de pago" attrs="{'invisible': [('state', '!=', 'service_for_approved')]}"/>
@@ -84,7 +80,18 @@
                             attrs="{'invisible': [('state', '!=', 'service_issue_voucher')]}"/>
 
                     <button name="action_validate_pre_factura" type="object" class="oe_highlight" string="Pre-factura"
-                            attrs="{'invisible': [('state', '!=', 'voucher_issue_send')]}"/>
+                            attrs="{'invisible': [('state', 'not in', ('voucher_issue_send', 'voucher_issue'))]}"/>
+
+                    <button name="action_confirm" type="object" string="Confirmar" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'pre_confirm')]}"/>
+
+                    <button name="action_cancel" string="Cancelar" type="object" class="oe_highlight"/>
+
+                    <button name="action_quotation_send" string="Enviar por correo Electronico" type="object" class="oe_highlight"
+                           attrs="{'invisible': [('state', 'not in', ('draft', 'pre_confirm'))]}"/>
+
+                    <button  name="%(sale.action_view_sale_advance_payment_inv)d" string="Crear Factura" type="action" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'pre_invoice')]}"/>
 
                 </xpath>
             <!--             -->

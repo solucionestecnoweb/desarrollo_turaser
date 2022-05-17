@@ -16,12 +16,14 @@
                                                 <span class="text-secondary" t-esc="line.product_id.name"/>
                                         </div>
                                     </div>
+
                                     <br/>
                                     <div class="row" style="margin-top: 15px;">
                                         <div class="col-6 text-left">
                                             <p>Gracias por comprar en Turaser</p>
                                         </div>
                                     </div>
+
                                     <div class="row" style="margin-top: 10px;">
                                         <div class="col-12 text-left">
                                             <p>Para cualquier consulta o información adicional, no dude en contactarnos a tráves del correo electronico <a href="fit@turaser.com"> fit@turaser.com</a>
@@ -29,32 +31,144 @@
                                             </p>
                                         </div>
                                     </div>
+
                                     <div class="row" style="margin-top: 25px;">
                                          <div class="col-9 mb4">
                                              <ul class="list-inline mb4">
-                                                 <li><strong>Dirección: </strong></li>
-                                                 <li><strong>Telefonos: </strong></li>
+                                                 <li t-if="line.type_service == 'hotel'"><strong t-esc="line.seller_id.name.name"/></li>
+                                                 <li t-if="line.type_service == 'Transfer'"><strong>Servicio: </strong>
+                                                     <span t-esc="line.product.name"/>
+                                                 </li>
                                              </ul>
                                          </div>
-
                                         <div class="col-3 mb4 bg-warning">
                                             <ul class="list-inline mb4">
-                                                <li><strong>PNR: </strong></li>
-                                                <li><strong>Conf: </strong></li>
+                                                <li><strong>PNR: </strong> <span t-esc="line.product_location"/></li>
+                                                <li t-if="line.type_service == 'hotel'"><strong>Conf: </strong> <span t-esc="o.product_location_in"/></li>
                                             </ul>
                                          </div>
                                     </div>
-                                    <div class="row" style="margin-top: 15px;">
-                                        <div class="col-8 mb4"/>
-                                         <div class="col-4 mb4 text-left">
+                                    <div class="row">
+                                        <div class="col-8 mb4">
                                              <ul class="list-inline mb4">
-                                                 <li><strong>Check In: </strong></li>
-                                                 <li><strong>Check Out: </strong></li>
+                                                 <li t-if="line.type_service == 'Transfer'"><strong>Operador: </strong>
+                                                     <span t-esc="line.seller_id.name.name"/>
+                                                 </li>
+                                                 <li><strong>Dirección: </strong>
+                                                     <span t-esc="line.seller_id.name.street"/>
+                                                     <span t-esc="line.seller_id.name.street2"/>
+                                                     <span t-esc="line.seller_id.name.city"/>
+                                                     <span t-esc="line.seller_id.name.parish_id.name"/> |
+                                                     <span t-esc="line.seller_id.name.country_id.name"/>
+                                                </li>
+                                                 <li><strong>Telefono: </strong>
+                                                     <span t-esc="line.seller_id.name.phone"/>
+                                                 </li>
+                                             </ul>
+                                        </div>
+                                        <div class="col-4 mb4 text-left">
+                                             <ul class="list-inline mb4">
+                                                 <li><strong>Check In: </strong> <span t-esc="line.start_date"/></li>
+                                                 <li><strong>Check Out: </strong> <span t-esc="line.end_date"/></li>
                                              </ul>
                                          </div>
                                     </div>
+                                    <div class="row" style="margin-top: 45px;">
+                                        <div class="col-12">
+                                             <ul class="list-inline mb4">
+                                                <li><strong>Room </strong><strong t-esc="int(line.product_uom_qty)"/>: <span t-esc="line.product_rom_id.name"/></li>
+                                             </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 35px;">
+                                        <div class="col-12">
+                                             <ul class="list-inline mb4">
+                                                 <li t-if="line.type_service == 'Transfer'"><strong>Hotel:</strong></li>
+                                                 <li t-if="line.type_service == 'Transfer'"><strong>Servicio:</strong></li>
+                                                 <t t-foreach="line.passenger_ids" t-as="p">
+                                                    <li>
+                                                        <strong>Passenger: </strong>
+                                                        <span t-esc="p.name"/>
+                                                    </li>
+                                                 </t>
+                                             </ul>
+                                        </div>
+                                    </div>
+                                    <div t-if="line.type_service == 'hotel'" class="row" style="margin-top: 60px;">
+                                        <div class="col-12">
+                                             <ul class="list-inline mb4">
+                                                 <li class="text-secondary"><strong>Politicas de Cancelacion: </strong></li>
+                                                 <br/>
+                                                 <br/>
+                                                 <li><p class="text-secondary" t-esc="line.seller_id.name.description_hotel"/></li>
+                                             </ul>
+                                        </div>
+                                    </div>
+
+                                    <div id="service_hotel" t-if="line.type_service == 'hotel'" style="margin-top: 200px;">
+                                        <div class="row">
+                                            <div class="col-12" style="background-color: #9D9B9A; border-top: 1px dashed black; border-bottom: 1px dashed black;">
+                                                 <ul class="list-inline mb4">
+                                                     <li class="text-dark text-center">
+                                                         <strong>Hotel Front Desk Use Only</strong>
+                                                     </li>
+                                                     <li class="text-dark text-center">
+                                                         <strong>Only payment fot extras to be collected from the client</strong>
+                                                     </li>
+                                                     <li class="text-dark">
+                                                         <span>Room Type</span>
+                                                     </li>
+                                                     <li class="text-dark">
+                                                         <span>Confirmation Code:</span>
+                                                         <span style="color: #2775FC;" t-esc="line.product_location"/> // <span style="color: #2775FC;" t-esc="o.product_location_in"/>
+                                                     </li>
+                                                     <li class="text-dark text-center">
+                                                         <span>Booked and payable by <strong>TURASER</strong></span>
+                                                     </li>
+                                                 </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="service_transfer" t-if="line.type_service == 'Transfer'">
+                                        <div class="row" style="margin-top: 60px;">
+                                            <div class="col-12">
+                                                <div><strong>Observaciones:</strong></div>
+                                                <br/>
+                                                <ul class="list-inline mb4">
+                                                     <li/>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                        <div class="row" style="margin-top: 60px;">
+                                            <div class="col-12" style="background-color: #9D9B9A; border-top: 1px dashed black; border-bottom: 1px dashed black;">
+                                                 <ul class="list-inline mb4">
+                                                     <li class="text-dark text-center">
+                                                         <strong>Operador de Servicio:</strong>
+                                                         <span t-esc="line.seller_id.name.name"/>
+                                                     </li>
+                                                     <li class="text-dark text-center">
+                                                         <strong>Telefono:</strong>
+                                                         <span t-esc="line.seller_id.name.phone"/>
+                                                     </li>
+                                                     <li class="text-dark">
+                                                         <strong>Servicio:</strong>
+                                                         <span t-esc="line.product.name"/>
+                                                     </li>
+                                                     <li class="text-dark">
+                                                         <span>Confirmation Code:</span>
+                                                         <span style="color: #2775FC;" t-esc="line.product_location"/> // <span style="color: #2775FC;" t-esc="o.product_location_in"/>
+                                                     </li>
+                                                     <li class="text-dark text-center">
+                                                         <span>Booked and payable by <strong>TURASER</strong></span>
+                                                     </li>
+                                                 </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p style="page-break-after: always;"/>
                                 </div>
-                                <p style="page-break-after: always;"/>
                             </t>
                         </div>
                     </t>

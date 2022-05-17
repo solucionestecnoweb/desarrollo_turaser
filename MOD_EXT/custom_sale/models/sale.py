@@ -33,7 +33,7 @@ class SaleOrder(models.Model):
         ('service_for_approved', 'Servicio por Aprobar'),
         ('service_approved', 'Servicio Aprobado'),
         ('service_issue_voucher', 'Servicio por Emitir Voucher'),
-        ('voucher_issue', 'Voucher Emitido'),
+        ('voucher_issue', 'Voucher Liberado'),
         ('voucher_issue_send', 'Voucher enviado por correo electronico o whatsapp'),
         ('pre_invoice', 'Pre-Factura'),
         ('invoice', 'Factura'),
@@ -59,8 +59,10 @@ class SaleOrder(models.Model):
         self.write({'state': 'service_issue_voucher'})
 
     def action_validate_voucher(self):
-        # self.write({'state': 'voucher_issue'})
-        return self.env.ref('custom_sale.action_sale_voucher').report_action(self)
+        self.write({'state': 'voucher_issue'})
+        for sale in self.order_line:
+            if sale.type_service in ['hotel', 'transfer']:
+                return self.env.ref('custom_sale.action_sale_voucher').report_action(self)
 
     def action_validate_pre_factura(self):
         self.write({'state': 'pre_invoice'})

@@ -6,3 +6,4 @@ from . import type_baggage
 from . import visa
 from . import passport
 from . import promotion
+from . import profession

@@ -7,29 +7,23 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/form/group/group[1]/field[@name='product_id']" position="after">
-                <field name="origin_id" attrs="{'invisible': [('type_service', 'not in', ('hotel', 'excursion', 'Transfer'))]}"/>
-                <field name="destination" attrs="{'invisible': [('type_service', '!=', 'Transfer')]}"/>
-            </xpath>
-
             <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/form/field[@name='company_id']" position="after">
                 <notebook>
                     <page name="itinerary" string="Itinerario de vuelo" attrs="{'invisible': [('type_service', '!=', 'ticket')]}">
-                        <group>
-                            <group>
+                        <field name="itinerary_ids" widget="section_and_note_one2many" mode="tree">
+                            <tree editable="bottom" string="Itinerary Items" default_order="sequence, id">
+                                <field name="sequence" widget="handle"/>
+                                <field name="sale_line_id" invisible="1"/>
                                 <field name="origin_id"/>
-                                <field name="destination"/>
-                            </group>
-                            <group>
-                                <field name="duration_flight" widget="float_time"/>
-                                <field name="arrival_time"/>
+                                <field name="destination_id"/>
                                 <field name="exit_time"/>
-                            </group>
-                        </group>
+                                <field name="arrival_time"/>
+                                <field name="duration_flight"/>
+                            </tree>
+                        </field>
                     </page>
                 </notebook>
             </xpath>
-
         </field>
     </record>
 </odoo>

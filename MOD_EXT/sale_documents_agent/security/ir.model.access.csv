@@ -4,3 +4,4 @@ access_type_baggage,type.baggage,model_type_baggage,,1,1,1,1
 access_visa,visa,model_visa,,1,1,1,1
 access_passport,passport,model_passport,,1,1,1,1
 access_promotion,promotion,model_promotion,,1,1,1,1
+access_profession,profession,model_profession,,1,1,1,1

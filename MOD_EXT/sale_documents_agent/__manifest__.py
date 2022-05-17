@@ -16,6 +16,7 @@
         'views/type_baggage_views.xml',
         'views/promotion_views.xml',
         'views/res_partner_views.xml',
+        'views/profession_views.xml',
         'views/menu_root.xml',
     ],
     'license': 'AGPL-3',

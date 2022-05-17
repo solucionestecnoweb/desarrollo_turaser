@@ -6,7 +6,7 @@
             <field name="name">itinerary.origin.tree</field>
             <field name="model">itinerary.origin</field>
             <field name="arch" type="xml">
-                <tree string="Origen" sample="1">
+                <tree string="Origen" editable="top" sample="1">
                     <field name="code" decoration-bf="1"/>
                     <field name="name"/>
                 </tree>
@@ -25,7 +25,7 @@
             <field name="name">itinerary.destination.tree</field>
             <field name="model">itinerary.destination</field>
             <field name="arch" type="xml">
-                <tree string="Destino" sample="1">
+                <tree string="Destino" editable="top" sample="1">
                     <field name="code" decoration-bf="1"/>
                     <field name="name"/>
                 </tree>

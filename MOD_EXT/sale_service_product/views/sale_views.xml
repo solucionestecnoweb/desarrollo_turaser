@@ -40,7 +40,14 @@
                     <field name="seller_id" domain="[('product_tmpl_id', '=', product_tmpl_id)]"
                            attrs="{'invisible': [('type_service', 'in', ('tickets', 'excursion', 'Transfer'))]}"/>
                     <field name="product_location"  attrs="{'invisible': [('type_service', 'in', ('tickets'))]}"/>
+
+
                     <field name="state_id" string="Ubicacion" attrs="{'invisible': [('type_service', 'not in', ('car'))]}"/>
+                    <field name="state_id" string="Origen"  attrs="{'invisible': [('type_service', 'not in', ('Transfer', 'ticket'))]}"/>
+
+                    <field name="state_id2" string="Lugar de Entrega" attrs="{'invisible': [('type_service', '!=', 'car')]}"/>
+                    <field name="state_id2" string="Destino" attrs="{'invisible': [('type_service', 'not in', ('hotel', 'ticket', 'Transfer', 'excursion'))]}"/>
+
                     <field name="product_code_id" string="Codigo" attrs="{'invisible': [('type_service', 'not in', ('tickets'))]}"/>
                     <field name="product_event_id" string="Evento" attrs="{'invisible': [('type_service', 'not in', ('tickets'))]}"/>
                     <field name="product_plan_id" attrs="{'invisible': [('type_service', 'in', ('tickets', 'excursion', 'Transfer', 'ticket', 'hotel'))]}"/>
@@ -53,7 +60,6 @@
                     <group name="service_product">
                         <field name="product_rom_id" attrs="{'invisible': [('type_service', 'not in', ('hotel'))]}"/>
                         <field name="product_ticket" attrs="{'invisible': [('type_service', 'not in', ('ticket'))]}"/>
-                        <field name="number_passenger" attrs="{'invisible': [('type_service', 'in', ('car'))]}"/>
 
                         <label for="start_date" attrs="{'invisible': [('type_service', 'not in', ('hotel'))]}"/>
                         <div name="date_service_hotel" class="o_row" attrs="{'invisible': [('type_service', 'not in', ('hotel'))]}">

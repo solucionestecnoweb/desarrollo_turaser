@@ -14,6 +14,7 @@
         'product',
         'l10n_ve_base',
         'sale_documents_agent',
+        'sale_passenger',
     ],
     'data': [
         'security/ir.model.access.csv',

@@ -31,5 +31,19 @@
                   parent="menu_product_service"
                   action="action_promotion"
                   groups="sales_team.group_sale_manager"/>
+
+        <menuitem
+                id="menu_profession_conf"
+                name="Profesiones"
+                parent="sale.menu_sale_config"
+                sequence="30"
+                groups="sales_team.group_sale_manager"
+        />
+
+        <menuitem id="menu_profession"
+                name="Profesion"
+                parent="menu_profession_conf"
+                action="action_profession"
+                groups="sales_team.group_sale_manager"/>
     </data>
 </odoo>

@@ -9,7 +9,7 @@
     'author': "INM & LDR Soluciones Tecnológicas y Empresariales C.A",
     'website': "http://www.yourcompany.com",
     'contribuitors': "Bryan Gómez <bryan.gomez1311@gmail.com>",
-    'depends': ['base', 'itinerary'],
+    'depends': ['base', 'sale_service_product'],
     'data': [
         'security/ir.model.access.csv',
         'views/res_partner_views.xml',

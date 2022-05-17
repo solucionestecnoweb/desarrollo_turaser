@@ -32,7 +32,7 @@
                             </group>
                         </group>
                         <footer>
-                            <button name="create_payment" string="Crear Pago" type="object"
+                            <button name="create_payment" string="Crear Soporte" type="object"
                                     class="btn-primary"/>
                             <button string="Cancel" class="btn-secondary" special="cancel"/>
                     </footer>

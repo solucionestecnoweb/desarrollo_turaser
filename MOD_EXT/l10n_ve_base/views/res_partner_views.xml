@@ -11,6 +11,8 @@
 
             <xpath expr="//form/sheet/group[1]/group[2]/field[@name='function']" position="before">
                 <field name="nationality_id" options="{'no_create': true}"/>
+                <field name="is_nationality_two" attrs="{'invisible': [('company_type','!=', 'person')]}"/>
+                <field name="nationality_id2" options="{'no_create': true}" attrs="{'invisible': [('is_nationality_two','=', False)]}"/>
             </xpath>
 
             <xpath expr="//field[@name='website']" position="after">
@@ -42,9 +44,6 @@
                     <span class="oe_read_only"> - </span>
                     <field name="vat2" placeholder="Number" class="oe_inline" attrs="{'readonly': [('parent_id','!=',False)], 'invisible': [('company_type','=', 'company')]}"/>
                 </div>
-                <field name="vat" string="RIF" placeholder="e.g. BE0477472701" attrs="{'readonly': [('parent_id','!=',False)]}"/>
-                <field name="vat2" string="Numero de Cedula" placeholder="e.g. BE0477472701"
-                       attrs="{'readonly': [('parent_id','!=',False)], 'invisible': [('company_type','=', 'company')]}"/>
             </xpath>
 
             <xpath expr="//form/sheet/notebook/page/field[@name='child_ids']/form/sheet/group[1]/group[2]" position="inside">
@@ -70,6 +69,26 @@
 
             <xpath expr="//form/sheet/notebook/page[@name='contact_addresses']" position="attributes">
                 <attribute name="attrs">{'invisible': [('company_type','in', ('freelance', 'person'))]}</attribute>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page name="info" string="Informacion adicional"  attrs="{'invisible': [('company_type','!=', 'company')]}">
+                    <group>
+                        <group>
+                            <field name="email1" widget="email" context="{'gravatar_image': True}"/>
+                            <field name="email2" widget="email" context="{'gravatar_image': True}"/>
+                        </group>
+                        <group>
+                            <field name="email3" widget="email" context="{'gravatar_image': True}"/>
+                            <field name="email4" widget="email" context="{'gravatar_image': True}"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description_hotel"/>
+                        <field name="description_rates"/>
+                        <field name="policy_legal_notice"/>
+                    </group>
+                </page>
             </xpath>
 
         </field>

@@ -5,6 +5,11 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
+
+            <xpath expr="//form/sheet/group[1]/group[2]/field[@name='function']" position="before">
+                <field name="profession_id" options="{'no_create': true}"/>
+            </xpath>
+
             <xpath expr="//notebook" position="inside">
                 <page name="visa" string="Visa"  attrs="{'invisible': [('company_type','!=', 'person')]}">
                     <field name="visa_ids" mode="kanban">
@@ -81,6 +86,7 @@
                         </form>
                     </field>
                 </page>
+
                 <page name="passport" string="Pasaporte"  attrs="{'invisible': [('company_type','=', 'company')]}">
                      <field name="passport_ids" mode="kanban">
                          <kanban class="o_kanban_small_column o_opportunity_kanban">
