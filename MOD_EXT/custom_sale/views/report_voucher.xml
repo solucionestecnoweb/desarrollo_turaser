@@ -37,7 +37,7 @@
                                              <ul class="list-inline mb4">
                                                  <li t-if="line.type_service == 'hotel'"><strong t-esc="line.seller_id.name.name"/></li>
                                                  <li t-if="line.type_service == 'Transfer'"><strong>Servicio: </strong>
-                                                     <span t-esc="line.product.name"/>
+                                                     <span t-esc="line.product_id.name"/>
                                                  </li>
                                              </ul>
                                          </div>
